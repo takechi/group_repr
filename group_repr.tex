@@ -1,0 +1,95 @@
+\documentclass[12pt]{beamer}
+\usepackage{luatexja}
+\usetheme{CambridgeUS}
+
+\usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{calc, decorations.pathmorphing, patterns}
+\usepackage[nomessages]{fp}
+
+%%%%%%% 調和振動子系
+%%%% \A*cos(\OMEGA*\t)+\B*sin(1.73*\OMEGA*\t) のパラメータ
+\def\A{1}
+\def\B{0.8}
+\def\OMEGA{0.2}
+
+%%% 壁などの描画のパラメータ
+\def\wallHeight{2}
+\def\wallWidth{0.2}
+\def\totalLength{10}
+\def\springStraightLength{0.2}
+\def\axisDepth{-0.7}
+\def\t{30}
+
+%%% 壁などのスタイル
+\tikzset{wall/.style={pattern = north east lines}}
+\tikzset{ball/.style={circle,shade,outer color=black!90!white,inner color=white,inner sep=2.5mm,label={$m$}}}
+\tikzset{spring/.style={decorate,decoration={aspect=0.4, segment length=#1, amplitude=2mm,coil}}}
+\tikzset{springk/.style={label={$k$},yshift=2}}
+
+%%%%%%%
+
+
+\title{群の表現}
+\author{武智}
+\begin{document}
+\frame{\maketitle}
+
+\begin{frame}{流れ}
+\begin{enumerate}
+\item 群とは
+\item 群の表現とは
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{連成振動子系}
+
+\FPeval\u{\A*cos(\OMEGA*\t)+\B*sin(1.73*\OMEGA*\t)}%
+\FPeval\v{\A*cos(\OMEGA*\t)-\B*sin(1.73*\OMEGA*\t)}%
+\centering
+\begin{tikzpicture}[>=stealth]
+%%% 左壁
+\coordinate (south east of left wall) at (0,-.5*\wallHeight);
+\coordinate (north west of left wall) at ($(south east of left wall) + (-\wallWidth,\wallHeight)$);
+\fill[wall] (south east of left wall) rectangle (north west of left wall);
+\draw[thick] (south east of left wall) -- (south east of left wall |- north west of left wall);
+%%% 右壁
+\coordinate (south west of right wall) at (\totalLength,-.5*\wallHeight);
+\coordinate (north east of right wall) at ($(south west of right wall) + (\wallWidth,\wallHeight)$);
+\fill[wall] (south west of right wall) rectangle (north east of right wall);
+\draw[thick] (south west of right wall) -- (south west of right wall |- north east of right wall);
+%%% おもり
+\node[ball] (a) at (\totalLength/3 + \u,0) {};
+\node[ball] (b) at (2*\totalLength/3 + \v,0) {};
+%%% 座標軸
+\draw[->] (0.5,\axisDepth) -- +(\totalLength-1,0);
+\draw[dotted,thick] (\totalLength/3,\axisDepth-0.3) -- +(0,1.6)
+              (2*\totalLength/3,\axisDepth-0.3) -- +(0,1.6)
+              (a.south |- south east of left wall) -- (a.south)
+              (b.south |- south east of left wall) -- (b.south);
+\draw[->] (\totalLength/3,\axisDepth-0.15) --node[below] {$x_1$} +(\u,0);
+\draw[->] (2*\totalLength/3,\axisDepth-0.15) --node[below] {$x_2$} +(\v,0);
+%%% 座標計算
+\coordinate (0) at (0,0);
+\coordinate (0-right) at (\springStraightLength,0);
+\coordinate (a-left) at ($(a.west) + (0.1-\springStraightLength,0)$);
+\coordinate (a-right) at ($(a.east) + (\springStraightLength,0)$);
+\coordinate (b-left) at ($(b.west) + (0.1-\springStraightLength,0)$);
+\coordinate (b-right) at ($(b.east) + (\springStraightLength,0)$);
+\coordinate (c-left) at (\totalLength + 0.1-\springStraightLength,0);
+\coordinate (c) at (\totalLength,0);
+%%% バネの直線部
+\draw (0) -- (0-right)
+      (a-left) -- (a.west)
+      (a.east) -- (a-right)
+      (b-left) -- (b.west)
+      (b.east) -- (b-right)
+      (c-left) -- (c);
+%%% バネのグルグル部
+\draw[spring={\totalLength/3 + \u}] (0-right) -- node[springk]{} (a-left);
+\draw[spring={\totalLength/3 + \v - \u}] (a-right) -- node[springk]{} (b-left);
+\draw[spring={\totalLength/3 - \v}] (b-right) -- node[springk]{} (c-left);
+\end{tikzpicture}
+
+\end{frame}
+\end{document}
