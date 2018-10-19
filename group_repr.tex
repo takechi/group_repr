@@ -4,13 +4,21 @@
 \usepackage{bm}
 \usepackage{setspace}
 \usepackage[style=phys, backend=biber]{biblatex}
+\usepackage[no-math]{luatexja-fontspec}
+
 \addbibresource{all.bib}
 
 % 論文タイトルの大文字小文字は bib ファイルのままにする
 \DeclareFieldFormat{titlecase}{#1}
 
+\setmainjfont{SourceHanSerifJP}
+\setsansjfont{SourceHanSansJP}
+\ltjsetparameter{jacharrange={-2}}
 
-\setstretch{1.2}
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+
+\setstretch{1.1}
+\setlength{\parskip}{7pt}
 
 \usetheme{CambridgeUS}
 
@@ -67,7 +75,6 @@
 \frametitle{はじめに}
 Q. 場の理論、楕円暗号のような、高度に抽象化された場面でしか群論は使えないのだろうか？
 
-\vspace{1\zw}
 $\rightsquigarrow$ A. そんなことはない。
 
 群は色々なところに潜んでいる。ただ、シンプルな系では、群論を意識せずに問題が解けてしまうことが多いため、
@@ -76,12 +83,14 @@ $\rightsquigarrow$ A. そんなことはない。
 
 \begin{frame}
 \frametitle{はじめに}
-群は代数的に定義されるので、そのままでは実体が捉えにくい。
+群は代数的な定義されるので、そのままでは実体が捉えにくい。
 
 そこで、群を線形代数と結び付けて、そこでの振る舞いから群を理解しよう、
 というのが「群の表現」という研究分野。
 
 線形代数という舞台の上では、具体的な計算もできるし、幾何学的なイメージも持てる。
+
+群の表現を知ることで、より群が身近なものになる（かも）。
 \end{frame}
 
 \begin{frame}
@@ -94,8 +103,20 @@ $\rightsquigarrow$ A. そんなことはない。
 \end{frame}
 
 \begin{frame}
+\frametitle{置換}
+Galoisが導入したのは置換群。
+
+元々は「置換の集まり」の意味で``groupe de substitusions''と呼んでいた。
+繰り返し言及するうちに、一般名詞 groupe が数学用語になっていったらしい。
+
+Galoisが数学用語としての groupe の定義を書き下したのは、決闘前夜だった\cite{Neumann2011}。
+
+\end{frame}
+\begin{frame}
 \frametitle{Galois理論}
-$5$次方程式が解けないことの証明に、なぜ「群」というものが必要だったのか。
+$5$次方程式が解けないことの証明に、なぜ群が必要だったのか。
+
+真面目にやると$1$学期かかるので、「気分」だけを簡単に
 
 \end{frame}
 
