@@ -1,11 +1,11 @@
 \documentclass[12pt, t]{beamer}
-\usepackage{luatexja}
 \usepackage{amsmath}
 \usepackage{bm}
 \usepackage{setspace}
 \usepackage[style=phys, backend=biber]{biblatex}
 \usepackage[no-math]{luatexja-fontspec}
-
+\usepackage[utf8]{inputenc}
+\usepackage{bxcoloremoji}
 \addbibresource{all.bib}
 
 % 論文タイトルの大文字小文字は bib ファイルのままにする
@@ -21,10 +21,12 @@
 \setlength{\parskip}{7pt}
 
 \usetheme{CambridgeUS}
+\usefonttheme{professionalfonts}
 
 \usepackage{geometry}
 \usepackage{tikz}
 \usetikzlibrary{calc, decorations.pathmorphing, patterns}
+\usetikzlibrary{cd}
 \usepackage[nomessages]{fp}
 
 %%%%%%% 調和振動子系
@@ -49,18 +51,27 @@
 
 %%%%%%%
 
+\newcommand{\eapple}{\coloremoji{🍎}}
+\newcommand{\etangerine}{\coloremoji{🍊}}
+\newcommand{\ebanana}{\coloremoji{🍌}}
+
+\newcommand{\lr}[1]{\left{}#1\right{}}
+\newcommand{\slr}[1]{\left[{}#1\right]{}}
+\newcommand{\clr}[1]{\left\{{}#1\right\}{}}
+
+\newcommand{\eAEB}{\slr{\eapple{}\etangerine{}\ebanana{}}}
+\newcommand{\eABE}{\slr{\eapple{}\ebanana{}\etangerine{}}}
+\newcommand{\eEAB}{\slr{\etangerine{}\eapple{}\ebanana{}}}
+\newcommand{\eEBA}{\slr{\etangerine{}\ebanana{}\eapple{}}}
+\newcommand{\eBAE}{\slr{\ebanana{}\eapple{}\etangerine{}}}
+\newcommand{\eBEA}{\slr{\ebanana{}\etangerine{}\eapple{}}}
+
+\def\opcty{0.05}
 
 \title{群の表現}
 \author{武智}
 \begin{document}
 \frame{\maketitle}
-
-\begin{frame}{流れ}
-\begin{enumerate}
-\item 群とは
-\item 群の表現とは
-\end{enumerate}
-\end{frame}
 
 \begin{frame}
 \frametitle{はじめに}
@@ -93,31 +104,842 @@ $\rightsquigarrow$ A. そんなことはない。
 群の表現を知ることで、より群が身近なものになる（かも）。
 \end{frame}
 
-\begin{frame}
-\frametitle{群とは}
-群の表現について議論するため、まずは群を定義する。
-
-初めて群を定義したのはGalois「方程式の冪根による可解条件について」(1830)。
-
-群の定義には至っていないものの、先駆的な研究としてLagrange(1771)やAbel(1824), Ruffini(1799)がある。
+\begin{frame}{流れ}
+\begin{enumerate}
+\item 群とは
+\begin{enumerate}
+\item 置換群
+\item 群の作用
+\end{enumerate}
+\item 群の表現とは
+\end{enumerate}
 \end{frame}
 
 \begin{frame}
-\frametitle{置換}
-Galoisが導入したのは置換群。
+\frametitle{群とは}
+初めて群を定義したのはGalois(1832)。
+
+群の定義には至っていないものの、先駆的な研究としてLagrange(1771)やAbel(1824), Ruffini(1799)がある。
+
+\end{frame}
+
+\begin{frame}
+\frametitle{置換群}
+Galoisが導入したのは今で言う置換群。
 
 元々は「置換の集まり」の意味で``groupe de substitusions''と呼んでいた。
 繰り返し言及するうちに、一般名詞 groupe が数学用語になっていったらしい。
 
-Galoisが数学用語としての groupe の定義を書き下したのは、決闘前夜だった\cite{Neumann2011}。
-
+Galoisが数学用語としての groupe の定義を書き下したのは、決闘前夜だったという\cite{Neumann2011}。
 \end{frame}
+
+\begin{frame}
+\frametitle{置換}
+\eapple{}と\etangerine{}と\ebanana{}の並び方は
+\begin{align}
+  \Omega = \clr{
+  \slr{\eapple{}\etangerine{}\ebanana{}},
+  \slr{\eapple{}\ebanana{}\etangerine{}},
+  \slr{\etangerine{}\ebanana{}\eapple{}},
+  \slr{\etangerine{}\eapple{}\ebanana{}},
+  \slr{\ebanana{}\eapple{}\etangerine{}},
+  \slr{\ebanana{}\etangerine{}\eapple{}}} \notag
+\end{align}
+の$6$通り。
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{並び方の間の変換}
+並び方の間の変換を全て考える。$6^2 = 36$個。
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[r, leftrightarrow]
+ \arrow[rrd, leftrightarrow]
+ \arrow[rdd, leftrightarrow]
+ \arrow[dd, leftrightarrow]
+ \arrow[ld, leftrightarrow]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rd, leftrightarrow]
+ \arrow[dd, leftrightarrow]
+ \arrow[ldd, leftrightarrow]
+ \arrow[lld, leftrightarrow]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rrr, leftrightarrow]
+ \arrow[rrd, leftrightarrow]
+ \arrow[rd, leftrightarrow]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[ld, leftrightarrow]
+ \arrow[lld, leftrightarrow]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3]
+ \arrow[r, leftrightarrow]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3]
+& 
+\end{tikzcd}
+\]
+$6$個の並び方それぞれから$6$本の矢印が生える。
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{$e$}
+自分自身へ戻る変換（恒等変換）$6$本をまとめて$e$と書く。
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3]
+& 
+\end{tikzcd}
+\]
+$e$は$\Omega \rightarrow \Omega$の全単射となる。
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{$\sigma_{12}$}
+$1$番目と$2$番目を入れ替える変換 $\sigma_{12}$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{$\sigma_{23}$}
+$2$番目と$3$番目を入れ替える変換 $\sigma_{23}$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{$\sigma_{31}$}
+$3$番目と$1$番目を入れ替える変換 $\sigma_{31}$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{$\sigma_{123}$}
+$1$番目$\rightarrow$$2$番目$\rightarrow$$3$番目$\rightarrow$$1$番目と入れ替える変換 $\sigma_{123}$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, rightarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, rightarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, rightarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, rightarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[uu, rightarrow]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[uu, rightarrow]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{$\sigma_{321}$}
+$3$番目$\rightarrow$$2$番目$\rightarrow$$1$番目$\rightarrow$$3$番目と入れ替える変換 $\sigma_{321}$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[uu, leftarrow]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[uu, leftarrow]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{変換の間の関係}
+この$6$種類の変換をまとめて$S_3$と書く。
+\begin{align}
+  S_3 = \clr{e, \sigma_{12}, \sigma_{23}, \sigma_{31}, \sigma_{123}, \sigma_{321}}
+\end{align}
+$S_3$の元は$\Omega \rightarrow \Omega$の写像なので、合成写像を考えることができる。
+
+例えば
+$e(\sigma_{12}(\Omega)) = \sigma_{12}(\Omega)$なので$e$と$\sigma_{12}$の合成写像は$\sigma_{12}$.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{$\sigma_{12} \cdot \sigma_{123} = \sigma_{23}$}
+${\color{blue} \sigma_{12}}(\sigma_{123}(\Omega)) = {\color{red} \sigma_{23}}(\Omega)$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, red]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, rightarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, blue]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, blue]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, rightarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, rightarrow]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, red]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, red]
+ \arrow[lld, rightarrow]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, blue]
+ \arrow[uu, rightarrow]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[uu, rightarrow]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{合成$=$積}
+写像の合成を、積の演算とみなす。$\sigma(\sigma'(\Omega)) = (\sigma \cdot \sigma')(\Omega)$
+\begin{center}
+\begin{tabular}{c|cccccc}
+  $\sigma \backslash \sigma'$ & $e$            & $\sigma_{12}$  & $\sigma_{23}$  & $\sigma_{31}$  & $\sigma_{123}$ & $\sigma_{321}$ \\ \hline
+  $e$                         & $e$            & $\sigma_{12}$  & $\sigma_{23}$  & $\sigma_{31}$  & $\sigma_{123}$ & $\sigma_{321}$ \\
+  $\sigma_{12}$               & $\sigma_{12}$  & $e$            & $\sigma_{123}$ & $\sigma_{321}$ & $\sigma_{23}$  & $\sigma_{31}$  \\
+  $\sigma_{23}$               & $\sigma_{23}$  & $\sigma_{321}$ & $e$            & $\sigma_{123}$ & $\sigma_{31}$  & $\sigma_{12}$  \\
+  $\sigma_{31}$               & $\sigma_{31}$  & $\sigma_{123}$ & $\sigma_{321}$ & $e$            & $\sigma_{12}$  & $\sigma_{23}$  \\
+  $\sigma_{123}$              & $\sigma_{123}$ & $\sigma_{31}$  & $\sigma_{12}$  & $\sigma_{23}$  & $\sigma_{321}$ & $e$            \\
+  $\sigma_{321}$              & $\sigma_{321}$ & $\sigma_{23}$  & $\sigma_{31}$  & $\sigma_{12}$  & $e$            & $\sigma_{123}$
+\end{tabular}
+\end{center}
+この表だけあれば、並び方$\Omega$の写像であることを忘れて
+$S_3$だけで計算ができる。$\rightsquigarrow$ $S_3$を改めて数学的対象と考える。$\rightsquigarrow$ 群
+\end{frame}
+
+\begin{frame}
+\frametitle{群の定義}
+空でない集合$G$に$2$項演算$\cdot$が定義されていて、次の$3$条件
+\begin{enumerate}
+\item 結合則: 任意の$a, b, c \in G$について $(a \cdot b) \cdot c = a \cdot (b \cdot c)$となる。
+\item 単位元の存在: 任意の$g \in G$について $g \cdot e = e \cdot g = g$ となる元 $e \in G$が存在する。
+\item 逆元の存在: 任意の$g \in G$について$g \cdot g^{-1} = g^{-1} \cdot g = e$ となる元 $g^{-1} \in G$が$g$ごとに存在する。
+\end{enumerate}
+を満たすとき、$G$は群であると言う。
+
+$S_3$が群であることを確認しよう。
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{結合則}
+結合則は、$\sigma \in S_3$が写像なので自然に成立。
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[ld, rightarrow]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, rightarrow, blue]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[ruu, rightarrow, red]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+& 
+\end{tikzcd}
+\]
+${\color{red} \sigma_{31}} \cdot {\color{blue} \sigma_{23}} \cdot \sigma_{12}$
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{結合則}
+結合則は、$\sigma \in S_3$が写像なので自然に成立。
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[ld, rightarrow, opacity=0.1]
+ \arrow[dd, rightarrow, green]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, rightarrow, blue, opacity=0.1]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[ruu, rightarrow, red]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+& 
+\end{tikzcd}
+\]
+${\color{red} \sigma_{31}} \cdot {\color{blue} \sigma_{23}} \cdot \sigma_{12}
+= {\color{red} \sigma_{31}} \cdot ({\color{blue} \sigma_{23}} \cdot \sigma_{12})
+= {\color{red} \sigma_{31}} \cdot {\color{green} \sigma_{321}}$
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{結合則}
+結合則は、$\sigma \in S_3$が写像なので自然に成立。
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[ld, rightarrow]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, rightarrow, blue, opacity=0.1]
+ \arrow[rru, rightarrow, purple]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[ruu, rightarrow, red, opacity=0.1]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+& 
+\end{tikzcd}
+\]
+${\color{red} \sigma_{31}} \cdot {\color{blue} \sigma_{23}} \cdot \sigma_{12}
+= ({\color{red} \sigma_{31}} \cdot {\color{blue} \sigma_{23}}) \cdot \sigma_{12}
+= {\color{purple} \sigma_{321}} \cdot \sigma_{12}$
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{単位元}
+単位元は恒等写像 $e$.
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rrr, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{逆元}
+逆元も、$\sigma \in S_3$が写像（矢印）なので自然に存在。
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[r, leftrightarrow]
+ \arrow[rrd, leftrightarrow]
+ \arrow[rdd, leftrightarrow]
+ \arrow[dd, leftrightarrow]
+ \arrow[ld, leftrightarrow]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rd, leftrightarrow]
+ \arrow[dd, leftrightarrow]
+ \arrow[ldd, leftrightarrow]
+ \arrow[lld, leftrightarrow]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rrr, leftrightarrow]
+ \arrow[rrd, leftrightarrow]
+ \arrow[rd, leftrightarrow]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[ld, leftrightarrow]
+ \arrow[lld, leftrightarrow]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3]
+ \arrow[r, leftrightarrow]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3]
+& 
+\end{tikzcd}
+\]
+$\therefore$ $S_3$は群。$S_3$は$3$次対称群と呼ばれる。
+\end{frame}
+
+\begin{frame}
+\frametitle{作用}
+$S_3$は集合$\Omega$上の変換をまとめたものだった。
+このようなとき、$S_3$は$\Omega$に\alert{作用する}という。
+
+一般に、群$G (\ni g)$と集合$X (\ni x)$について $g(x) \in X$が存在し
+\begin{enumerate}
+\item $g(h(x)) = (g \cdot h)(x)$
+\item $e(x) = x$
+\end{enumerate}
+が成立するとき、$G$は$X$に作用するという。
+
+歴史的には、作用から群が抽出された（作用 $\rightarrow$ 群）。
+
+現代数学では抽象的に群を導入し、それを色々な集合に作用させる
+という使い方が多い（群 $\rightarrow$ 作用）。
+\end{frame}
+
+\begin{frame}
+\frametitle{自分自身への作用}
+$S_3$は並べ方（$\eAEB$など）に作用する群だったが、
+$S_3$を集合とみなせば、$S_3$は$S_3$自身に作用することができる。
+
+なぜなら、$\sigma, \sigma' \in S_3$について $\sigma(\sigma') = \sigma \cdot \sigma' \in S_3$として
+\begin{enumerate}
+\item $\sigma_a(\sigma_b(\sigma)) = \sigma_a \cdot \sigma_b \cdot \sigma) = (\sigma_a \cdot \sigma_b)(\sigma)$
+\item $e(\sigma) = e \cdot \sigma = \sigma$
+\end{enumerate}
+となるため。
+\end{frame}
+
+\begin{frame}
+\frametitle{整数}
+自分自身への作用の例として、整数$\mathbb{Z}$がある。
+
+整数$\mathbb{Z}$は加法$+$について$0$を単位元とする群である。
+\begin{enumerate}
+\item $(k + l) + m = k + (l + m)$
+\item $k + 0 = 0 + k = k$
+\item $k + (-k) = (-k) + k = 0$
+\end{enumerate}
+通常、$3 + 4 = 7$と書いたとき、両辺が「加法群$\mathbb{Z}$」の元なのか、
+「整数集合$\mathbb{Z}$」の元なのか、を意識することは少ない。
+
+前者なら群の$2$項演算であり、後者なら群の作用である。
+\end{frame}
+
+
 \begin{frame}
 \frametitle{Galois理論}
 $5$次方程式が解けないことの証明に、なぜ群が必要だったのか。
 
-真面目にやると$1$学期かかるので、「気分」だけを簡単に
+真面目にやると$1$学期かかるので、「気分」だけを簡単に。
+\end{frame}
 
+\begin{frame}
+\frametitle{解と係数の関係}
+$2$次方程式 $x^2 + bx + c = 0$ を考える。$b, c$は有理数である。\\
+$2$つの解を $\alpha, \beta$ とおくと
+\begin{align}
+  x^2 + bx + c &= (x - \alpha)(x - \beta) \notag \\
+  &= x^2 -(\alpha + \beta)x + \alpha \beta
+\end{align}
+より、
+\begin{align}
+  b &= -(\alpha + \beta) \\
+  c &= \alpha \beta
+\end{align}
+を得る。
+\end{frame}
+
+\begin{frame}
+\frametitle{置換に対する対称性}
+$b = -(\alpha + \beta),\ c = \alpha \beta$は、$\alpha \leftrightarrow \beta$の置換について不変。
+$\alpha$と$\beta$を入れ替える変換を$\sigma_{\alpha \beta}$と書くと
+\begin{align}
+  \sigma_{\alpha \beta}(b) &= \sigma_{\alpha \beta} (-(\alpha + \beta)) \notag \\
+                           &= -(\beta + \alpha) = b \\
+  \sigma_{\alpha \beta}(c) &= \sigma_{\alpha \beta}(\alpha \beta) \notag \\
+                           &= (\beta \alpha) = c
+\end{align}
+また、$b,\ c$に四則演算を行った$b + c$や $c (b + 3 c/b)$なども、全て$\sigma_{\alpha \beta}$について不変。
+\end{frame}
+
+\begin{frame}
+\frametitle{置換に対する対称性}
+ところで、解$\alpha$そのものに$\sigma_{\alpha \beta}$を作用させると
+\begin{align}
+  \sigma_{\alpha \beta}(\alpha) = \beta \neq \alpha
+\end{align}
+すなわち$\alpha$は$\sigma_{\alpha \beta}$について不変ではない。$\beta$も同様。
+
+$b,\ c$に四則演算を行ったものは全て$\sigma_{\alpha \beta}$について不変だったので、
+$\alpha$と$\beta$は、$b,\ c$の四則演算だけで表されるものではないことが分かる。
+
+$\sigma_{\alpha \beta}$不変な集合から「抜け出す」ための演算が\alert{根号$\sqrt{\ }$}である。
 \end{frame}
 
 \begin{frame}
@@ -189,3 +1011,7 @@ Mは「2質点であること」を制限する条件。
 \end{frame}
 
 \end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
