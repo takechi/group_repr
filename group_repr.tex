@@ -55,7 +55,7 @@
 \newcommand{\etangerine}{\coloremoji{🍊}}
 \newcommand{\ebanana}{\coloremoji{🍌}}
 
-\newcommand{\lr}[1]{\left{}#1\right{}}
+\newcommand{\lr}[1]{\left({}#1\right){}}
 \newcommand{\slr}[1]{\left[{}#1\right]{}}
 \newcommand{\clr}[1]{\left\{{}#1\right\}{}}
 
@@ -940,6 +940,110 @@ $b,\ c$に四則演算を行ったものは全て$\sigma_{\alpha \beta}$につ�
 $\alpha$と$\beta$は、$b,\ c$の四則演算だけで表されるものではないことが分かる。
 
 $\sigma_{\alpha \beta}$不変な集合から「抜け出す」ための演算が\alert{根号$\sqrt{\ }$}である。
+\end{frame}
+
+\begin{frame}
+\frametitle{根号による対称性の破れ}
+最も簡単な場合として $x^2 + c = 0$ を考える。その解は
+\begin{align}
+  x = \pm \sqrt{-c}
+\end{align}
+である。この$\pm$のどちらかを選ぶことで、$\sigma_{\alpha \beta}$不変性が破られる。
+
+このように、$\sqrt{\ }$は$2$次対称群$S_2 = \clr{e, \sigma_{\alpha \beta}}$の
+不変性を壊すことができる。\\
+$\rightsquigarrow$ $\sqrt{\ }$を使って解$\alpha,\ \beta$を記述できる。\\
+$\rightsquigarrow$ $2$次方程式の解の公式が存在する。
+\end{frame}
+
+\begin{frame}
+\frametitle{$3$次方程式}
+$3$次方程式$x^3+bx^2+cx+d=0$についても、解を$\alpha,\ \beta,\ \gamma$として
+\begin{align}
+  b &= -(\alpha + \beta + \gamma) \\
+  c &= \alpha \beta + \beta \gamma + \gamma \alpha \\
+  d &= -\alpha \beta \gamma
+\end{align}
+であり、$b,\ c,\ d$は$\sigma \in S_3$について不変。
+\end{frame}
+
+\begin{frame}
+\frametitle{$3$次方程式の解の対称性}
+解$\alpha,\ \beta,\ \gamma$について、
+$\alpha \rightarrow \beta \rightarrow \gamma \rightarrow \alpha$とする変換$\sigma_{\alpha \beta \gamma}$について
+\begin{align}
+  \sigma_{\alpha \beta \gamma}(\alpha) = \beta \neq \alpha
+\end{align}
+などとなり、$\alpha,\ \beta, \gamma$は$S_3$不変ではない。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+天下りだが、$1$の立方根$\omega = (-1 + \sqrt{-3})/2$を使って
+\begin{align}
+  U &= \lr{\alpha + \beta \omega + \gamma \omega^2}^3 \\
+  V &= \lr{\alpha + \gamma \omega + \beta \omega^2}^3
+\end{align}
+と置くと$U$と$V$は$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$について不変。e.g.
+\begin{align}
+  \sigma_{\alpha \beta \gamma}\lr{U} &= \sigma_{\alpha \beta \gamma}\lr{\lr{\alpha + \beta \omega + \gamma \omega^2}^3} \notag \\
+                                     &= \lr{\beta + \gamma \omega + \alpha \omega^2}^3 \notag \\
+                                     &= \lr{\beta + \gamma \omega + \alpha \omega^2}^3 \omega^3 \notag \\
+                                     &= \lr{\beta \omega + \gamma \omega^2 + \alpha \omega^3}^3 \notag \\
+                                     &= \lr{\alpha + \beta \omega + \gamma \omega^2}^3 = U
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+また、$U$と$V$は$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$で入れ替わる。
+\begin{align}
+  \sigma_{\alpha \beta}\lr{U} &= \lr{\beta + \alpha \omega + \gamma \omega^2}^3 \notag \\
+                              &= \lr{\beta + \alpha \omega + \gamma \omega^2}^3 \omega^6 \notag \\
+                              &= \lr{\beta \omega^2+ \alpha \omega^3 + \gamma \omega^4}^3 \notag \\
+                              &= \lr{\alpha + \gamma \omega + \beta \omega^2}^3 = V.
+\end{align}
+したがって$U + V,\ UV$は$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$についても不変。
+つまり、$U + V,\ UV$は$S_3$不変になり、係数$b,\ c,\ d$で記述できる。
+\end{frame}
+
+
+\begin{frame}
+\frametitle{対称性の分解}
+四則演算の関数 $f_+,\ f_\ast$で
+\begin{align}
+  U + V &= f_+(b, c, d) \\
+  U V &= f_\ast(b, c, d)
+\end{align}
+と書けているので、この連立方程式を解けば$U,\ V$が$b,\ c,\ d$の四則演算と$\sqrt{\ }$で表される。
+ここの$\sqrt{\ }$では、$U \leftrightarrow V$の対称性、
+すなわち$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$の不変性を壊している。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+$U,\ V$が解けると、
+\begin{align}
+  -b &= \alpha + \beta + \gamma \\
+  \sqrt[3]{U} &= \alpha + \beta \omega + \gamma \omega^2 \\
+  \sqrt[3]{V} &= \alpha + \beta \omega^2 + \gamma \omega
+\end{align}
+なので、この$3$元連立方程式を解けば$\alpha,\ \beta,\ \gamma$が求められる。
+ここの$\sqrt[3]{\ }$で$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$の
+不変性が壊れる。
+\end{frame}
+
+\begin{frame}
+\frametitle{方程式の可解性}
+$3$次方程式が解けるのは、$U + V$と$UV$という$2$つの$S_3$不変な式（対称式）が見付かったからである。
+
+$4$次方程式についても、$4$次対称群$S_4$について $3$つの$S_4$不変な式が見付かり、
+これを$3$次方程式を使って解くことで、$4$次方程式が解ける。
+
+しかし、$5$次方程式では、$5$次対象群$S_5$にそのような``都合のいい対称式''は存在せず、
+そのために$5$次方程式の解の公式は存在しない。
+
+この``都合のいい対称式''が存在しないことの証明に、群論が使われる。
 \end{frame}
 
 \begin{frame}
