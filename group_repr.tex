@@ -938,7 +938,30 @@ $\alpha$と$\beta$を入れ替える変換を$\sigma_{\alpha \beta}$と書くと
 
 $b,\ c$に四則演算を行ったものは全て$\sigma_{\alpha \beta}$について不変だったので、
 $\alpha$と$\beta$は、$b,\ c$の四則演算だけで表されるものではないことが分かる。
+\end{frame}
 
+\begin{frame}
+\frametitle{数の空間}
+つまり、係数$b,\ c$の四則演算だけでは解$\alpha, \beta$に「到達」できない。\\
+（四則演算だけで$2$次方程式の解の公式は得られない）
+\[
+\begin{tikzpicture}
+\fill (-0.3,-0.15) circle (1pt);
+\draw (-0.3,-0.15) node[anchor=south]{$b$};
+\fill (0.3,-0.25) circle (1pt);
+\draw (0.3,-0.25) node[anchor=south]{$c$};
+\draw (0,0) circle (1cm and 0.5cm);
+\draw (0,-0.5) circle (1.75cm and 1cm);
+\draw (0,-0.42) node[anchor=north]{$b$と$c$の四則演算};
+\draw (0,-0.9) circle (2cm and 1.4cm);
+\fill (-0.7,-2) circle (1pt);
+\draw (-0.7,-2) node[anchor=south]{$\alpha$};
+\fill (0.7,-2) circle (1pt);
+\draw (0.7,-2) node[anchor=south]{$\beta$};
+\draw[->] (2.4,0.0) node[anchor=west]{$\sigma_{\alpha \beta}$不変} -- (1.75, -0.5);
+\draw[->] (2.4,-0.8) node[anchor=west]{$\sigma_{\alpha \beta}$不変とは限らない} -- (2, -0.9);
+\end{tikzpicture}
+\]
 $\sigma_{\alpha \beta}$不変な集合から「抜け出す」ための演算が\alert{根号$\sqrt{\ }$}である。
 \end{frame}
 
@@ -964,7 +987,7 @@ $3$次方程式$x^3+bx^2+cx+d=0$についても、解を$\alpha,\ \beta,\ \gamma
   c &= \alpha \beta + \beta \gamma + \gamma \alpha \\
   d &= -\alpha \beta \gamma
 \end{align}
-であり、$b,\ c,\ d$は$\sigma \in S_3$について不変。
+であり、$b,\ c,\ d$は $\slr{\alpha \beta \gamma]$の置換$\sigma \in S_3$について不変。
 \end{frame}
 
 \begin{frame}
@@ -1015,9 +1038,11 @@ $\alpha \rightarrow \beta \rightarrow \gamma \rightarrow \alpha$とする変換$
   U + V &= f_+(b, c, d) \\
   U V &= f_\ast(b, c, d)
 \end{align}
-と書けているので、この連立方程式を解けば$U,\ V$が$b,\ c,\ d$の四則演算と$\sqrt{\ }$で表される。
-ここの$\sqrt{\ }$では、$U \leftrightarrow V$の対称性、
-すなわち$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$の不変性を壊している。
+と書けているので、この$2$元連立$2$次方程式を解けば$U,\ V$が$b,\ c,\ d$の四則演算と$\sqrt{\ }$で表される。
+
+この$2$次方程式と解く際に$\sqrt{\ }$をとるので、$U \leftrightarrow V$の対称性、
+すなわち$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$の不変性が
+壊れる。（$U$と$V$の「区別がつかない」空間から、「区別がつく」空間に拡がる）
 \end{frame}
 
 \begin{frame}
@@ -1029,8 +1054,13 @@ $U,\ V$が解けると、
   \sqrt[3]{V} &= \alpha + \beta \omega^2 + \gamma \omega
 \end{align}
 なので、この$3$元連立方程式を解けば$\alpha,\ \beta,\ \gamma$が求められる。
-ここの$\sqrt[3]{\ }$で$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$の
+ここの$\sqrt[3]{\ }$をとるときにで$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$の
 不変性が壊れる。
+\end{frame}
+
+\begin{frame}
+\frametitle{数の空間の拡大}
+$\clr{b,c,d} \rightarrow \clr{U+V, UV} \in $\{$b,c,d$の四則演算\}$ \rightarrow \clr{U, V} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma{\gamma \beta \alpha} inv.} \rightarrow \clr{\sqrt[3]{U}, \alpha, \beta, \gamma}$
 \end{frame}
 
 \begin{frame}
