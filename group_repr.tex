@@ -937,12 +937,15 @@ $\alpha$と$\beta$を入れ替える変換を$\sigma_{\alpha \beta}$と書くと
 すなわち$\alpha$は$\sigma_{\alpha \beta}$について不変ではない。$\beta$も同様。
 
 $b,\ c$に四則演算を行ったものは全て$\sigma_{\alpha \beta}$について不変だったので、
-$\alpha$と$\beta$は、$b,\ c$の四則演算だけで表されるものではないことが分かる。
+\begin{center}
+$\alpha$と$\beta$は $b,\ c$の四則演算だけで表すことはできない
+\end{center}
+ということが分かる。
 \end{frame}
 
 \begin{frame}
 \frametitle{数の空間}
-つまり、係数$b,\ c$の四則演算だけでは解$\alpha, \beta$に「到達」できない。\\
+つまり、係数$b,\ c$の四則演算だけでは解$\alpha,\ \beta$に「到達」できない。\\
 （四則演算だけで$2$次方程式の解の公式は得られない）
 \[
 \begin{tikzpicture}
@@ -958,11 +961,11 @@ $\alpha$と$\beta$は、$b,\ c$の四則演算だけで表されるものでは�
 \draw (-0.7,-2) node[anchor=south]{$\alpha$};
 \fill (0.7,-2) circle (1pt);
 \draw (0.7,-2) node[anchor=south]{$\beta$};
-\draw[->] (2.4,0.0) node[anchor=west]{$\sigma_{\alpha \beta}$不変} -- (1.75, -0.5);
-\draw[->] (2.4,-0.8) node[anchor=west]{$\sigma_{\alpha \beta}$不変とは限らない} -- (2, -0.9);
+\draw[->] (2.4,0.0) node[anchor=west]{$S_2 = \clr{e,\ \sigma_{\alpha \beta}}$不変} -- (1.75, -0.5);
+\draw[->] (2.4,-0.8) node[anchor=west]{$e$不変（$=$自明な不変性しかない）} -- (2, -0.9);
 \end{tikzpicture}
 \]
-$\sigma_{\alpha \beta}$不変な集合から「抜け出す」ための演算が\alert{根号$\sqrt{\ }$}である。
+$S_2$不変な数の集合から「抜け出す」ための演算が\alert{根号$\sqrt{\ }$}である。
 \end{frame}
 
 \begin{frame}
@@ -987,7 +990,7 @@ $3$次方程式$x^3+bx^2+cx+d=0$についても、解を$\alpha,\ \beta,\ \gamma
   c &= \alpha \beta + \beta \gamma + \gamma \alpha \\
   d &= -\alpha \beta \gamma
 \end{align}
-であり、$b,\ c,\ d$は $\slr{\alpha \beta \gamma]$の置換$\sigma \in S_3$について不変。
+であり、$b,\ c,\ d$は $\slr{\alpha \beta \gamma}$の置換$\sigma \in S_3$について不変。
 \end{frame}
 
 \begin{frame}
@@ -1060,7 +1063,7 @@ $U,\ V$が解けると、
 
 \begin{frame}
 \frametitle{数の空間の拡大}
-$\clr{b,c,d} \rightarrow \clr{U+V, UV} \in $\{$b,c,d$の四則演算\}$ \rightarrow \clr{U, V} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma{\gamma \beta \alpha} inv.} \rightarrow \clr{\sqrt[3]{U}, \alpha, \beta, \gamma}$
+%$\clr{b,c,d} \rightarrow \clr{U+V, UV} \in $\{$b,c,d$の四則演算\}$ \rightarrow \clr{U, V} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma{\gamma \beta \alpha} inv.} \rightarrow \clr{\sqrt[3]{U}, \alpha, \beta, \gamma}$
 \end{frame}
 
 \begin{frame}
