@@ -969,16 +969,31 @@ $S_2$不変な数の集合から「抜け出す」ための演算が\alert{根�
 \end{frame}
 
 \begin{frame}
-\frametitle{根号による対称性の破れ}
-最も簡単な場合として $x^2 + c = 0$ を考える。その解は
+\frametitle{対称性を破る}
+ところで、$\alpha - \beta$ は$\sigma_{\alpha \beta}$をかけると$-1$倍になる（不変でない）
 \begin{align}
-  x = \pm \sqrt{-c}
+  \sigma_{\alpha \beta} \lr{\alpha - \beta} &= \beta - \alpha = -(\alpha - \beta)
 \end{align}
-である。この$\pm$のどちらかを選ぶことで、$\sigma_{\alpha \beta}$不変性が破られる。
+しかし、その$2$乗である$(\alpha - \beta)^2$は、$(-1)^2 = 1$なので、
+\begin{align}
+  \sigma_{\alpha \beta} \lr{\lr{\alpha - \beta}^2} &= \lr{\beta - \alpha}^2 = \lr{\beta - \alpha}^2 (-1)^2 \notag \\
+                                                   &= \clr{-(\alpha - \beta)(-1)}^2 \notag \\
+                                                   &= \lr{\alpha - \beta}^2
+\end{align}
+となり、$\sigma_{\alpha \beta}$不変になる。$\Leftrightarrow$ $b,\ c$で書ける。
+\end{frame}
 
-このように、$\sqrt{\ }$は$2$次対称群$S_2 = \clr{e, \sigma_{\alpha \beta}}$の
-不変性を壊すことができる。\\
-$\rightsquigarrow$ $\sqrt{\ }$を使って解$\alpha,\ \beta$を記述できる。\\
+\begin{frame}
+\frametitle{根号による対称性の破れ}
+すなわち、
+\begin{align}
+  (\alpha - \beta)^2 &= (\alpha + \beta)^2 - 4 \alpha \beta \notag \\
+                     &= b^2 - 4 c \\
+  \alpha - \beta &= \pm \sqrt{b^2 - 4 c}.
+\end{align}
+ここの根号$\pm \sqrt{\ }$で\alert{対称性が破れる}。あとは、これと$\alpha + \beta = -b$を
+連立すれば、$\alpha,\ \beta$が解ける。
+
 $\rightsquigarrow$ $2$次方程式の解の公式が存在する。
 \end{frame}
 
@@ -1001,6 +1016,72 @@ $\alpha \rightarrow \beta \rightarrow \gamma \rightarrow \alpha$とする変換$
   \sigma_{\alpha \beta \gamma}(\alpha) = \beta \neq \alpha
 \end{align}
 などとなり、$\alpha,\ \beta, \gamma$は$S_3$不変ではない。
+
+$2$次方程式のときと同様、係数$b,\ c,\ d$の四則演算で解を記述することはできない。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+天下りだが、$1$の立方根$\omega_{\pm} = (-1 \pm \sqrt{-3})/2$を使って
+\begin{align}
+  U &= \alpha + \beta \omega_+ + \gamma \omega_+^2 \\
+  V &= \alpha + \beta \omega_- + \gamma \omega_-^2
+\end{align}
+と置く。$U$（$V$)に$\sigma_{\alpha \beta \gamma}$（$\sigma_{\gamma \beta \alpha}$）をかけると$\omega_-$（$\omega_+$）倍になる。
+\begin{align}
+  \sigma_{\alpha \beta \gamma}\lr{U} &= \beta + \gamma \omega_+ + \alpha \omega_+^2 \notag \\
+                                     &= \omega_+^3 \lr{\beta + \gamma \omega_+ + \alpha \omega_+^2} \notag \\
+                                     &= \omega_+^2 \lr{\beta \omega_+ + \gamma \omega_+^2 + \alpha \omega_+^3} \notag \\
+                                     &= \omega_+^2 \lr{\alpha + \beta \omega_+ + \gamma \omega_+^2} = \omega_+^2 U = \omega_- U
+\end{align}
+最終等号では$\omega_\pm = \omega_{\mp}^2$を使った。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+すると、$(\alpha - \beta)^2$が対称式になったように、
+$U^3,\ V^3$は$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$で不変になる。
+\begin{align}
+  \sigma_{\alpha \beta \gamma} \lr{U^3} &= (\omega_- U)^3 = U^3 \\
+  \sigma_{\gamma \beta \alpha} \lr{U^3} &= \lr{\sigma_{\alpha \beta \gamma}^2}\lr{U^3} = U^3 \\
+  \sigma_{\gamma \beta \alpha} \lr{V^3} &= (\omega_+ V)^3 = V^3 \\
+  \sigma_{\alpha \beta \gamma} \lr{V^3} &= \lr{\sigma_{\gamma \beta \alpha}^2}\lr{V^3} = V^3 \\
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+さらに都合の良いことに、$U^3$に$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}$をかけると$V^3$になる。
+\begin{align}
+  \sigma_{\alpha \beta}\lr{U^3}  &= \lr{\beta + \alpha \omega_+ + \gamma \omega_+^2}^3 \notag \\
+                                 &= \lr{\beta + \alpha \omega_+ + \gamma \omega_+^2}^3 \omega_+^6 \notag \\
+                                 &= \lr{\beta \omega_+^2 + \alpha \omega_+^3 + \gamma \omega_+^4}^3 \notag \\
+                                 &= \lr{\alpha + \beta \omega_- + \gamma \omega_-^2}^3 = V^3 \\
+  \sigma_{\beta \gamma}\lr{U^3}  &= \lr{\alpha + \gamma \omega_+ + \beta \omega_+^2}^3 \notag \\
+                                 &= \lr{\alpha + \beta \omega_- + \gamma \omega_+^2}^3 = V^3
+  \sigma_{\gamma \alpha}\lr{U^3} &= \lr{\gamma + \beta \omega_+ + \alpha \omega_+^2}^3 \notag \\
+                                 &= \lr{\gamma + \beta \omega_+ + \alpha \omega_+^2}^3 \omega_+^3 \notag \\
+                                 &= \lr{\gamma \omega_+ + \beta \omega_+^2 + \alpha \omega_+^3}^3 \notag \\
+                                 &= \lr{\alpha + \beta \omega_- + \gamma \omega_-^2}^3 = V^3
+\end{align}
+したがって、$U^3 + V^3$のような$U^3 \leftrightarrow V^3$の置換について対称な式は
+$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}$不変。
+
+また、$U^3 - V^3$に$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}$をかけると$-1$倍になる。
+\end{frame}
+\begin{frame}
+\frametitle{対称性の分解}
+すると、$(\alpha - \beta)^2$が$\sigma_{\alpha \beta}$不変になったように、
+$(U^3-V^3)^2$は$\clr{\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}}$不変になる。
+
+ところで、$U,\ V$は$\clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$不変だったので、
+$(U^3 - V^3)^2$は$S_3$不変。
+$\rightsquigarrow$ 係数$b,\ c,\ d$で記述できる。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解}
+$(U^3 - V^3)^2$を係数$b,\ c,\ d$で書いてしまえば、あとは
 \end{frame}
 
 \begin{frame}
@@ -1033,7 +1114,6 @@ $\alpha \rightarrow \beta \rightarrow \gamma \rightarrow \alpha$とする変換$
 つまり、$U + V,\ UV$は$S_3$不変になり、係数$b,\ c,\ d$で記述できる。
 \end{frame}
 
-
 \begin{frame}
 \frametitle{対称性の分解}
 四則演算の関数 $f_+,\ f_\ast$で
@@ -1057,13 +1137,31 @@ $U,\ V$が解けると、
   \sqrt[3]{V} &= \alpha + \beta \omega^2 + \gamma \omega
 \end{align}
 なので、この$3$元連立方程式を解けば$\alpha,\ \beta,\ \gamma$が求められる。
-ここの$\sqrt[3]{\ }$をとるときにで$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$の
+ここの$\sqrt[3]{\ }$をとるときに$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$の
 不変性が壊れる。
 \end{frame}
 
 \begin{frame}
 \frametitle{数の空間の拡大}
-%$\clr{b,c,d} \rightarrow \clr{U+V, UV} \in $\{$b,c,d$の四則演算\}$ \rightarrow \clr{U, V} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma{\gamma \beta \alpha} inv.} \rightarrow \clr{\sqrt[3]{U}, \alpha, \beta, \gamma}$
+% $\clr{b,c,d} \rightarrow \clr{U+V, UV} \in $\{$b,c,d$の四則演算\}$ \rightarrow \clr{U, V} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma{\gamma \beta \alpha} inv.} \rightarrow \clr{\sqrt[3]{U}, \alpha, \beta, \gamma}$
+\[
+\begin{tikzpicture}
+\fill (-0.3,-0.15) circle (1pt);
+\draw (-0.3,-0.15) node[anchor=south]{$b$};
+\fill (0.3,-0.25) circle (1pt);
+\draw (0.3,-0.25) node[anchor=south]{$c$};
+\draw (0,0) circle (1cm and 0.5cm);
+\draw (0,-0.5) circle (1.75cm and 1cm);
+\draw (0,-0.42) node[anchor=north]{$b$と$c$の四則演算};
+\draw (0,-0.9) circle (2cm and 1.4cm);
+\fill (-0.7,-2) circle (1pt);
+\draw (-0.7,-2) node[anchor=south]{$\alpha$};
+\fill (0.7,-2) circle (1pt);
+\draw (0.7,-2) node[anchor=south]{$\beta$};
+\draw[->] (2.4,0.0) node[anchor=west]{$\sigma_{\alpha \beta}$不変} -- (1.75, -0.5);
+\draw[->] (2.4,-0.8) node[anchor=west]{$\sigma_{\alpha \beta}$不変とは限らない} -- (2, -0.9);
+\end{tikzpicture}
+\]
 \end{frame}
 
 \begin{frame}
