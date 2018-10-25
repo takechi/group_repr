@@ -558,6 +558,99 @@ ${\color{blue} \sigma_{12}}(\sigma_{123}(\Omega)) = {\color{red} \sigma_{23}}(\O
 \]
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{$\sigma_{31} \cdot \sigma_{12} = \sigma_{123}$}
+${\color{blue} \sigma_{31}}(\sigma_{12}(\Omega)) = {\color{red} \sigma_{123}}(\Omega)$
+\[
+\begin{tikzcd}
+&
+\eAEB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[r, leftrightarrow, opacity=\opcty]
+ \arrow[rrd, rightarrow, red]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rdd, leftrightarrow, blue]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ld, leftrightarrow]
+&
+\eABE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rd, leftrightarrow]
+ \arrow[dd, leftrightarrow, opacity=\opcty]
+ \arrow[ldd, leftrightarrow, blue]
+ \arrow[lld, rightarrow, red]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+&
+\\
+\eEAB
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[rrr, leftrightarrow, blue]
+ \arrow[rrd, rightarrow, red]
+ \arrow[rrd, leftrightarrow, opacity=\opcty]
+ \arrow[rd, leftrightarrow, opacity=\opcty]
+&
+&
+&
+\eBAE
+ \arrow[loop, out=120, in=60, looseness=3, opacity=\opcty]
+ \arrow[ld, leftrightarrow, opacity=\opcty]
+ \arrow[lld, rightarrow, red]
+ \arrow[lld, leftrightarrow, opacity=\opcty]
+\\
+&
+\eEBA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[r, leftrightarrow]
+ \arrow[uu, rightarrow, red]
+&
+\eBEA
+ \arrow[loop, out=240, in=300, looseness=3, opacity=\opcty]
+ \arrow[uu, rightarrow, red]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{互換と、置換の偶奇}
+$\sigma_{123}(\Omega) = \sigma_{12}(\sigma_{23}(\Omega)) = \sigma_{31}(\sigma_{12}(\Omega))$.
+
+$\sigma_{12}$のような「$2$個の交換」を特に\alert{互換}と呼ぶ。
+どんな並び方の変換（並び替え）も互換の組み合わせで書ける（cf. あみだくじ）。
+
+並び替えを互換で表す組み合わせは色々あり得るが、互換個数の偶奇は変わらない。
+\vspace{-1\zw}
+\begin{center}
+{\tiny
+\begin{tabular}{cccccc}
+&&&&& \\
+\multicolumn{2}{c}{\eapple} & \multicolumn{2}{c}{\etangerine} & \multicolumn{2}{c}{\ebanana} \\
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\\cline{4-5}
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\\cline{2-3}
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\
+\multicolumn{2}{c}{\ebanana} & \multicolumn{2}{c}{\eapple} & \multicolumn{2}{c}{\etangerine}
+\end{tabular}
+$=$
+\begin{tabular}{cccccc}
+&&&&& \\
+\multicolumn{2}{c}{\eapple} & \multicolumn{2}{c}{\etangerine} & \multicolumn{2}{c}{\ebanana} \\
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\\cline{2-3}
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\\cline{2-3}
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\\cline{4-5}
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\\cline{2-3}
+& \multicolumn{2}{|c|}{} & \multicolumn{2}{|c|}{} & \\
+\multicolumn{2}{c}{\ebanana} & \multicolumn{2}{c}{\eapple} & \multicolumn{2}{c}{\etangerine}
+\end{tabular}
+}
+\end{center}
+
+互換の個数が偶数（奇数）になる置換を偶置換（奇置換）と呼ぶ。
+\end{frame}
+
+
 \begin{frame}
 \frametitle{合成$=$積}
 写像の合成を、積の演算とみなす。$\sigma(\sigma'(\Omega)) = (\sigma \cdot \sigma')(\Omega)$
@@ -576,13 +669,14 @@ ${\color{blue} \sigma_{12}}(\sigma_{123}(\Omega)) = {\color{red} \sigma_{23}}(\O
 $S_3$だけで計算ができる。$\rightsquigarrow$ $S_3$を改めて数学的対象と考える。$\rightsquigarrow$ 群
 \end{frame}
 
+
 \begin{frame}
 \frametitle{群の定義}
 空でない集合$G$に$2$項演算$\cdot$が定義されていて、次の$3$条件
 \begin{enumerate}
-\item 結合則: 任意の$a, b, c \in G$について $(a \cdot b) \cdot c = a \cdot (b \cdot c)$となる。
-\item 単位元の存在: 任意の$g \in G$について $g \cdot e = e \cdot g = g$ となる元 $e \in G$が存在する。
-\item 逆元の存在: 任意の$g \in G$について$g \cdot g^{-1} = g^{-1} \cdot g = e$ となる元 $g^{-1} \in G$が$g$ごとに存在する。
+\item 結合則：任意の$a, b, c \in G$について $(a \cdot b) \cdot c = a \cdot (b \cdot c)$となる。
+\item 単位元の存在：任意の$g \in G$について $g \cdot e = e \cdot g = g$ となる元 $e \in G$が存在する。
+\item 逆元の存在：任意の$g \in G$について$g \cdot g^{-1} = g^{-1} \cdot g = e$ となる元 $g^{-1} \in G$が$g$ごとに存在する。
 \end{enumerate}
 を満たすとき、$G$は群であると言う。
 
@@ -845,11 +939,104 @@ $\therefore$ $S_3$は群。$S_3$は$3$次対称群と呼ばれる。
 \end{frame}
 
 \begin{frame}
+\frametitle{自明な群}
+最も簡単な群は、恒等変換$e$だけから成る群である。
+\begin{enumerate}
+\item 結合側：$(e \cdot e) \cdot e = e \cdot (e \cdot e)$
+\item 単位元：$e \cdot e = e$
+\item 逆元：$e \cdot e = e \Rightarrow e^{-1} = e$
+\end{enumerate}
+この$\clr{e}$を自明な群と呼ぶ。
+\end{frame}
+
+\begin{frame}
+\frametitle{部分群}
+ある群の部分集合だけで群になることがある。
+
+例えば$S_3$の中で
+\begin{align}
+  \Sigma_{12} &= \clr{e,\ \sigma_{12}},\
+  \Sigma_{23} = \clr{e,\ \sigma_{23}},\
+  \Sigma_{31} = \clr{e,\ \Sigma_{31}},\\
+  A_3 &= \clr{e,\ \sigma_{123},\ \sigma_{321}}
+\end{align}
+はそれぞれ群になる。\\このようなとき、$A_3$は$S_3$の部分群であると言う。
+\end{frame}
+
+\begin{frame}
+\frametitle{$3$次交代群}
+$A_3$は$S_3$の中の偶置換を集めたもの（偶置換同士の積は偶置換）。
+\begin{tabular}{c|ccc}
+                 &$e$           &$\sigma_{123}$&$\sigma_{321}$\\ \hline
+  $e$            &$e$           &$\sigma_{123}$&$\sigma_{321}$\\
+  $\sigma_{123}$ &$\sigma_{123}$&$\sigma_{321}$&$e$ \\
+  $\sigma_{321}$ &$\sigma_{321}$&$e$           &$\sigma_{123}$
+\end{tabular}
+
+なお、構成要素が$3$個の群は必ず$A_3$と同じ（同型）になる。
+\end{frame}
+
+\begin{frame}
+\frametitle{$3$次交代群}
+互いに異なる元$3$個からなる群を$G_3$とする。
+$G_3$の元のうち$1$つは単位元$e$なので$G_3 = \clr{e, g, h}$と書いておく。
+
+積の表は、単位元の性質から
+\begin{center}
+\begin{tabular}{c|ccc}
+      &$e$&$g$&$h$\\ \hline
+  $e$ &$e$&$g$&$h$\\
+  $g$ &$g$&   & \\
+  $h$ &$h$&   &
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{$3$次交代群}
+$g \cdot h = g$とすると、$h = e$になってしまう。\\
+$g \cdot h = h$とすると、$g = e$になってしまう。\\
+したがって$g \cdot h = e$.同様に$h \cdot g = e$.
+\begin{center}
+\begin{tabular}{c|ccc}
+      &$e$&$g$&$h$\\ \hline
+  $e$ &$e$&$g$&$h$\\
+  $g$ &$g$&   &$e$\\
+  $h$ &$h$&$e$&
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{$3$次交代群}
+$g \cdot g = g$とすると、両辺に$g^{-1}$をかけると$g = e$になってしまう。
+$g \cdot g = e$とすると、$g \cdot h = e$なので$g = h$になってしまう。\\
+したがって$g \cdot g = h$.
+同様に$h \cdot h = g$.
+\begin{center}
+\begin{tabular}{c|ccc}
+      &$e$&$g$&$h$\\ \hline
+  $e$ &$e$&$g$&$h$\\
+  $g$ &$g$&$h$&$e$\\
+  $h$ &$h$&$e$&$g$
+\end{tabular}
+$=$
+\begin{tabular}{c|ccc}
+                 &$e$           &$\sigma_{123}$&$\sigma_{321}$\\ \hline
+  $e$            &$e$           &$\sigma_{123}$&$\sigma_{321}$\\
+  $\sigma_{123}$ &$\sigma_{123}$&$\sigma_{321}$&$e$ \\
+  $\sigma_{321}$ &$\sigma_{321}$&$e$           &$\sigma_{123}$
+\end{tabular}
+\end{center}
+$3$元からなる群は常に$A_3$と同じ（同型）になる。
+\end{frame}
+
+\begin{frame}
 \frametitle{作用}
 $S_3$は集合$\Omega$上の変換をまとめたものだった。
 このようなとき、$S_3$は$\Omega$に\alert{作用する}という。
 
-一般に、群$G (\ni g)$と集合$X (\ni x)$について $g(x) \in X$が存在し
+一般に、群$G (\ni g)$と集合$X (\ni x)$について写像$g(x) \in X$が存在し
 \begin{enumerate}
 \item $g(h(x)) = (g \cdot h)(x)$
 \item $e(x) = x$
@@ -867,9 +1054,9 @@ $S_3$は集合$\Omega$上の変換をまとめたものだった。
 $S_3$は並べ方（$\eAEB$など）に作用する群だったが、
 $S_3$を集合とみなせば、$S_3$は$S_3$自身に作用することができる。
 
-なぜなら、$\sigma, \sigma' \in S_3$について $\sigma(\sigma') = \sigma \cdot \sigma' \in S_3$として
+なぜなら、$\sigma_a, \sigma_b \in S_3$について $\sigma_a(\sigma_b) = \sigma \cdot \sigma_b \in S_3$として
 \begin{enumerate}
-\item $\sigma_a(\sigma_b(\sigma)) = \sigma_a \cdot \sigma_b \cdot \sigma) = (\sigma_a \cdot \sigma_b)(\sigma)$
+\item $\sigma_a(\sigma_b(\sigma)) = \sigma_a \cdot \sigma_b \cdot \sigma = (\sigma_a \cdot \sigma_b)(\sigma)$
 \item $e(\sigma) = e \cdot \sigma = \sigma$
 \end{enumerate}
 となるため。
@@ -885,10 +1072,34 @@ $S_3$を集合とみなせば、$S_3$は$S_3$自身に作用することがで�
 \item $k + 0 = 0 + k = k$
 \item $k + (-k) = (-k) + k = 0$
 \end{enumerate}
-通常、$3 + 4 = 7$と書いたとき、両辺が「加法群$\mathbb{Z}$」の元なのか、
-「整数集合$\mathbb{Z}$」の元なのか、を意識することは少ない。
 
-前者なら群の$2$項演算であり、後者なら群の作用である。
+$3 + 4 = 7$は、
+「整数$3$」に「$4$を足す」を作用させると「整数$7$」になる、と考えることもできる。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性}
+群は対称性を記述する道具であると言われる。
+
+集合$X$上のある全単射 $f: X \rightarrow X; x \mapsto f(x)$について、
+\begin{align}
+  f(\xi) = \xi
+\end{align}
+が成立するとき、$\xi$は\alert{$f$不変である}、または\alert{$f$対称である}と言う。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性と群}
+$\xi \in X$について、$f(\xi) = \xi$となる変換$f$の全体を$F$とすると、\\
+$F$は$f(g(\xi)) = (f \cdot g)(\xi)$を積演算として群になる。
+
+\begin{enumerate}
+\item 結合側：$((f \cdot g) \cdot h)(\xi) = f(g(h(\xi))) = (f \cdot (g \cdot h))(\xi)$
+\item 単位元：恒等変換 $e(\xi) = \xi$ なので $e \in F$
+\item 逆元：$f^{-1}(f(\xi)) = f^{-1}(\xi) = \xi$なので$f^{-1} \in F$
+\end{enumerate}
+
+このようにして、対称性（不変性）と群が対応する。
 \end{frame}
 
 
@@ -900,8 +1111,8 @@ $5$次方程式が解けないことの証明に、なぜ群が必要だった�
 \end{frame}
 
 \begin{frame}
-\frametitle{解と係数の関係}
-$2$次方程式 $x^2 + bx + c = 0$ を考える。$b, c$は有理数である。\\
+\frametitle{$2$次方程式}
+$2$次方程式 $x^2 + bx + c = 0$ を考える。$b, c$は有理数とする。\\
 $2$つの解を $\alpha, \beta$ とおくと
 \begin{align}
   x^2 + bx + c &= (x - \alpha)(x - \beta) \notag \\
@@ -923,7 +1134,7 @@ $\alpha$と$\beta$を入れ替える変換を$\sigma_{\alpha \beta}$と書くと
   \sigma_{\alpha \beta}(b) &= \sigma_{\alpha \beta} (-(\alpha + \beta)) \notag \\
                            &= -(\beta + \alpha) = b \\
   \sigma_{\alpha \beta}(c) &= \sigma_{\alpha \beta}(\alpha \beta) \notag \\
-                           &= (\beta \alpha) = c
+                           &= \beta \alpha = c
 \end{align}
 また、$b,\ c$に四則演算を行った$b + c$や $c (b + 3 c/b)$なども、全て$\sigma_{\alpha \beta}$について不変。
 \end{frame}
@@ -976,8 +1187,8 @@ $S_2$不変な数の集合から「抜け出す」ための演算が\alert{根�
 \end{align}
 しかし、その$2$乗である$(\alpha - \beta)^2$は、$(-1)^2 = 1$なので、
 \begin{align}
-  \sigma_{\alpha \beta} \lr{\lr{\alpha - \beta}^2} &= \lr{\beta - \alpha}^2 = \lr{\beta - \alpha}^2 (-1)^2 \notag \\
-                                                   &= \clr{-(\alpha - \beta)(-1)}^2 \notag \\
+  \sigma_{\alpha \beta} \lr{\lr{\alpha - \beta}^2} &= \lr{\sigma_{\alpha \beta}(\alpha - \beta)}^2 \notag \\
+                                                   &= \clr{-\lr{\alpha - \beta}}^2 \notag \\
                                                    &= \lr{\alpha - \beta}^2
 \end{align}
 となり、$\sigma_{\alpha \beta}$不変になる。$\Leftrightarrow$ $b,\ c$で書ける。
@@ -1019,6 +1230,86 @@ $\alpha \rightarrow \beta \rightarrow \gamma \rightarrow \alpha$とする変換$
 
 $2$次方程式のときと同様、係数$b,\ c,\ d$の四則演算で解を記述することはできない。
 \end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解：$S_3 \rightarrow A_3$}
+$2$次方程式における$\alpha - \beta$に対応するものが
+\begin{align}
+  T = (\alpha - \beta)(\beta - \gamma)(\gamma - \alpha)
+\end{align}
+である。$T$に互換$\clr{\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}}$をかけると$-1$倍になる。e.g.
+\begin{align}
+  \sigma_{\alpha \beta}(T) &= (\beta - \alpha)(\alpha - \gamma)(\gamma - \beta) = -(\alpha - \beta)(\beta - \gamma)(\gamma - \alpha) = -T \notag
+\end{align}
+一方、偶置換 $A_3 = \clr{e,\ \sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}}$については、$T$は不変。e.g.
+\begin{align}
+  \sigma_{\alpha \beta \gamma}(T) = \sigma_{\alpha \beta}(\sigma_{\beta \gamma}(T)) = (-1)^2 T = T
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解：$S_3 \rightarrow A_3$}
+$T$は奇置換で$-1$倍、偶置換で$1$倍（不変）であったので、
+任意の置換$\sigma \in S_3$について、$T^2$は
+\begin{align}
+  \sigma(T^2) = (\sigma(T))^2 = (\pm T)^2 = T^2
+\end{align}
+となり、すなわち$S_3$不変。$\Leftrightarrow$ $T^2$は係数$b,\ c,\ d$で書ける。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解：$S_3 \rightarrow A_3$}
+したがって、$T$は$b,\ c,\ d$と平方根$\sqrt{\ }$で記述できることになる。
+
+しかし、$T$はまだ$A_3 = \clr{e,\ \sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}}$で不変なので、
+解$\alpha,\ \beta,\ \gamma$を$T$で記述することはできない。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解：$A_3 \rightarrow e$}
+ここで、$1$の立方根$\omega_{\pm} = (-1 \pm \sqrt{-3})/2$を使って
+\begin{align}
+  U_{\pm} &= \alpha + \beta \omega_{\pm} + \gamma \omega_{\pm}^2
+\end{align}
+と置く。$U_{\pm}$に$\sigma_{\alpha \beta \gamma}$をかけると$\omega_{\mp}$倍になる。
+\begin{align}
+  \sigma_{\alpha \beta \gamma}\lr{U_{\pm}} &= \beta + \gamma \omega_{\pm} + \alpha \omega_{\pm}^2 \notag \\
+                                     &= \omega_{\pm}^3 \lr{\beta + \gamma \omega_{\pm} + \alpha \omega_{\pm}^2} \notag \\
+                                     &= \omega_{\pm}^2 \lr{\alpha + \beta \omega_{\pm} + \gamma \omega_{\pm}^2} = \omega_{\pm}^2 U = \omega_{\mp} U
+\end{align}
+なお、$\omega_\pm^3 = 1,\ \omega_\pm^2 = \omega_{\mp}$を使った。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解：$A_3 \rightarrow e$}
+すると、$(\alpha - \beta)^2$や$T^2$と同じ仕組みで、
+$U_{\pm}^3$は$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$で不変になる。
+\begin{align}
+  \sigma_{\alpha \beta \gamma} \lr{U_{\pm}^3} &= (\omega_{\mp} U_{\pm})^3 = U_{\pm}^3 \\
+  \sigma_{\gamma \beta \alpha} \lr{U_{\pm}^3} &= \lr{\sigma_{\alpha \beta \gamma}^2}\lr{U_{\pm}^3} = U_{\pm}^3
+\end{align}
+$\therefore$ $U_{\pm}^3$は$A_3$不変。$\Leftrightarrow$ $U_{\pm}^3$は$T$と$b, c, d$の四則演算で記述できる。
+
+$\Leftrightarrow$その立方根である$U_{\pm}$は、$T, b, c, d$と立方根$\sqrt[3]{\ }$で記述できる。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性の分解：$A_3 \rightarrow e$}
+あとは、
+\begin{align}
+  -b   &= \alpha + \beta + \gamma \\
+  U_+  &= \alpha + \beta \omega_+ + \gamma \omega_+^2 \\
+  U_-  &= \alpha + \beta \omega_- + \gamma \omega_-^2
+\end{align}
+だったので、この$3$元連立方程式を解けば$\alpha,\ \beta,\ \gamma$が求められる。\\
+$\rightsquigarrow$ 解が係数$b,\ c,\ d$と
+$\sqrt{\ },\ \sqrt[3]{\ }$で記述される。\\
+$\rightsquigarrow$ $3$次方程式の解の公式が存在する。
+\end{frame}
+
+
+
+
 
 \begin{frame}
 \frametitle{対称性の分解}
