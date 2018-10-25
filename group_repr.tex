@@ -6,6 +6,7 @@
 \usepackage[no-math]{luatexja-fontspec}
 \usepackage[utf8]{inputenc}
 \usepackage{bxcoloremoji}
+\usepackage{comment}
 \addbibresource{all.bib}
 
 % 論文タイトルの大文字小文字は bib ファイルのままにする
@@ -66,7 +67,7 @@
 \newcommand{\eBAE}{\slr{\ebanana{}\eapple{}\etangerine{}}}
 \newcommand{\eBEA}{\slr{\ebanana{}\etangerine{}\eapple{}}}
 
-\def\opcty{0.05}
+\def\opcty{0.1}
 
 \title{群の表現}
 \author{武智}
@@ -966,15 +967,21 @@ $\therefore$ $S_3$は群。$S_3$は$3$次対称群と呼ばれる。
 \begin{frame}
 \frametitle{$3$次交代群}
 $A_3$は$S_3$の中の偶置換を集めたもの（偶置換同士の積は偶置換）。
+\begin{center}
 \begin{tabular}{c|ccc}
                  &$e$           &$\sigma_{123}$&$\sigma_{321}$\\ \hline
   $e$            &$e$           &$\sigma_{123}$&$\sigma_{321}$\\
   $\sigma_{123}$ &$\sigma_{123}$&$\sigma_{321}$&$e$ \\
   $\sigma_{321}$ &$\sigma_{321}$&$e$           &$\sigma_{123}$
 \end{tabular}
+\end{center}
 
-なお、構成要素が$3$個の群は必ず$A_3$と同じ（同型）になる。
+一般に、$n$次対称群$S_n$（$n$要素の置換全体のなす群）の中で、\\
+偶置換全体のなす部分群$A_n$を$n$次交代群と呼ぶ。
+%なお、構成要素が$3$個の群は必ず$A_3$と同じ（同型）になる。
 \end{frame}
+
+\begin{comment}
 
 \begin{frame}
 \frametitle{$3$次交代群}
@@ -1031,9 +1038,11 @@ $=$
 $3$元からなる群は常に$A_3$と同じ（同型）になる。
 \end{frame}
 
+\end{comment}
+
 \begin{frame}
 \frametitle{作用}
-$S_3$は集合$\Omega$上の変換をまとめたものだった。
+$S_3$は並べ方の集合$\Omega$上の変換を集めたものだった。
 このようなとき、$S_3$は$\Omega$に\alert{作用する}という。
 
 一般に、群$G (\ni g)$と集合$X (\ni x)$について写像$g(x) \in X$が存在し
@@ -1062,6 +1071,52 @@ $S_3$を集合とみなせば、$S_3$は$S_3$自身に作用することがで�
 となるため。
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{自分自身への作用}
+\[
+\begin{tikzcd}
+&
+e
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[r, leftrightarrow]
+ \arrow[rrd, leftrightarrow]
+ \arrow[rdd, leftrightarrow]
+ \arrow[dd, leftrightarrow]
+ \arrow[ld, leftrightarrow]
+&
+\sigma_{23}
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rd, leftrightarrow]
+ \arrow[dd, leftrightarrow]
+ \arrow[ldd, leftrightarrow]
+ \arrow[lld, leftrightarrow]
+&
+\\
+\sigma_{12}
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[rrr, leftrightarrow]
+ \arrow[rrd, leftrightarrow]
+ \arrow[rd, leftrightarrow]
+&
+&
+&
+\sigma_{123}
+ \arrow[loop, out=120, in=60, looseness=3]
+ \arrow[ld, leftrightarrow]
+ \arrow[lld, leftrightarrow]
+\\
+&
+\sigma_{321}
+ \arrow[loop, out=240, in=300, looseness=3]
+ \arrow[r, leftrightarrow]
+&
+\sigma_{31}
+ \arrow[loop, out=240, in=300, looseness=3]
+& 
+\end{tikzcd}
+\]
+\end{frame}
+
 \begin{frame}
 \frametitle{整数}
 自分自身への作用の例として、整数$\mathbb{Z}$がある。
@@ -1074,6 +1129,7 @@ $S_3$を集合とみなせば、$S_3$は$S_3$自身に作用することがで�
 \end{enumerate}
 
 $3 + 4 = 7$は、
+「$3$を足す」と「$4$を足す」の合成が「$7$を足す」になる、と考えることもできるし、
 「整数$3$」に「$4$を足す」を作用させると「整数$7$」になる、と考えることもできる。
 \end{frame}
 
@@ -1094,7 +1150,7 @@ $\xi \in X$について、$f(\xi) = \xi$となる変換$f$の全体を$F$とす�
 $F$は$f(g(\xi)) = (f \cdot g)(\xi)$を積演算として群になる。
 
 \begin{enumerate}
-\item 結合側：$((f \cdot g) \cdot h)(\xi) = f(g(h(\xi))) = (f \cdot (g \cdot h))(\xi)$
+\item 結合則：$((f \cdot g) \cdot h)(\xi) = f(g(h(\xi))) = (f \cdot (g \cdot h))(\xi)$
 \item 単位元：恒等変換 $e(\xi) = \xi$ なので $e \in F$
 \item 逆元：$f^{-1}(f(\xi)) = f^{-1}(\xi) = \xi$なので$f^{-1} \in F$
 \end{enumerate}
@@ -1160,19 +1216,15 @@ $\alpha$と$\beta$は $b,\ c$の四則演算だけで表すことはできない
 （四則演算だけで$2$次方程式の解の公式は得られない）
 \[
 \begin{tikzpicture}
-\fill (-0.3,-0.15) circle (1pt);
 \draw (-0.3,-0.15) node[anchor=south]{$b$};
-\fill (0.3,-0.25) circle (1pt);
-\draw (0.3,-0.25) node[anchor=south]{$c$};
+\draw (0.3,-0.15) node[anchor=south]{$c$};
 \draw (0,0) circle (1cm and 0.5cm);
 \draw (0,-0.5) circle (1.75cm and 1cm);
-\draw (0,-0.42) node[anchor=north]{$b$と$c$の四則演算};
+\draw (0,-0.42) node[anchor=north]{{\small $b$と$c$の四則演算}};
 \draw (0,-0.9) circle (2cm and 1.4cm);
-\fill (-0.7,-2) circle (1pt);
-\draw (-0.7,-2) node[anchor=south]{$\alpha$};
-\fill (0.7,-2) circle (1pt);
-\draw (0.7,-2) node[anchor=south]{$\beta$};
-\draw[->] (2.4,0.0) node[anchor=west]{$S_2 = \clr{e,\ \sigma_{\alpha \beta}}$不変} -- (1.75, -0.5);
+\draw (-0.7,-1.8) node{$\alpha$};
+\draw (0.7,-1.8) node{$\beta$};
+\draw[->] (2.4,-0.2) node[anchor=west]{$S_2 = \clr{e,\ \sigma_{\alpha \beta}}$不変} -- (1.75, -0.5);
 \draw[->] (2.4,-0.8) node[anchor=west]{$e$不変（$=$自明な不変性しかない）} -- (2, -0.9);
 \end{tikzpicture}
 \]
@@ -1308,7 +1360,33 @@ $\rightsquigarrow$ $3$次方程式の解の公式が存在する。
 \end{frame}
 
 
-
+\begin{frame}
+\frametitle{数の空間}
+\[
+\begin{tikzpicture}
+\draw (-0.3,-0.15) node[anchor=south]{$b$};
+\draw (0,-0.15) node[anchor=south]{$c$};
+\draw (0.3,-0.15) node[anchor=south]{$d$};
+\draw (0,0) circle (1cm and 0.5cm);
+\draw (0,-0.5) circle (1.75cm and 1cm);
+\draw (0,-0.42) node[anchor=north]{{\tiny $b,c,d$の四則演算}};
+\draw (0,-1.42) node[anchor=south]{$T^2$};
+\draw (0,-0.9) circle (2cm and 1.4cm);
+\draw (-0.7,-2.1) node[anchor=south]{$U_-^3$};
+\draw (0.7,-2.1) node[anchor=south]{$U_+^3$};
+\draw (0,-2.2) node[anchor=south]{$T$};
+\draw (0,-1.3) circle (3cm and 1.8cm);
+\draw (-1.2,-2.7) node[anchor=south]{$U_-$};
+\draw (1.2,-2.7) node[anchor=south]{$U_+$};
+\draw (-0.6,-2.8) node{$\alpha$};
+\draw (0,-2.8) node{$\beta$};
+\draw (0.6,-2.8) node{$\gamma$};
+\draw[->] (3.4,0.0) node[anchor=west]{$S_3$不変} -- (1.75, -0.5);
+\draw[->] (3.4,-0.6) node[anchor=west]{$A_3$不変} -- (2, -0.9);
+\draw[->] (3.4,-1.2) node[anchor=west]{$e$不変} -- (3, -1.3);
+\end{tikzpicture}
+\]
+\end{frame}
 
 
 \begin{frame}
