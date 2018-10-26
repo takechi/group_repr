@@ -1063,12 +1063,14 @@ $S_3$は並べ方の集合$\Omega$上の変換を集めたものだった。
 $S_3$は並べ方（$\eAEB$など）に作用する群だったが、
 $S_3$を集合とみなせば、$S_3$は$S_3$自身に作用することができる。
 
-なぜなら、$\sigma_a, \sigma_b \in S_3$について $\sigma_a(\sigma_b) = \sigma \cdot \sigma_b \in S_3$として
+自分自身への作用の仕方は無数にあるが、例えば
+$\sigma_a, \sigma_b \in S_3$について $\sigma_a(\sigma_b) = \sigma_a \cdot \sigma_b \in S_3$と
+とればよい。
 \begin{enumerate}
 \item $\sigma_a(\sigma_b(\sigma)) = \sigma_a \cdot \sigma_b \cdot \sigma = (\sigma_a \cdot \sigma_b)(\sigma)$
 \item $e(\sigma) = e \cdot \sigma = \sigma$
 \end{enumerate}
-となるため。
+なので、これは作用になる。
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1160,8 +1162,10 @@ $F$は$f(g(\xi)) = (f \cdot g)(\xi)$を積演算として群になる。
 
 
 \begin{frame}
-\frametitle{Galois理論}
-$5$次方程式が解けないことの証明に、なぜ群が必要だったのか。
+\frametitle{Abel-Ruffiniの定理}
+$5$次以上の方程式は解の公式を持たない。
+
+その証明に、なぜ群が必要だったのか。
 
 真面目にやると$1$学期かかるので、「気分」だけを簡単に。
 \end{frame}
@@ -1184,14 +1188,16 @@ $2$つの解を $\alpha, \beta$ とおくと
 
 \begin{frame}
 \frametitle{置換に対する対称性}
-$b = -(\alpha + \beta),\ c = \alpha \beta$は、$\alpha \leftrightarrow \beta$の置換について不変。
-$\alpha$と$\beta$を入れ替える変換を$\sigma_{\alpha \beta}$と書くと
+$b = -(\alpha + \beta),\ c = \alpha \beta$は、$\alpha \leftrightarrow \beta$の置換について不変。\\
+つまり、$\alpha$と$\beta$の互換を$\sigma_{\alpha \beta}$と書くと、
 \begin{align}
   \sigma_{\alpha \beta}(b) &= \sigma_{\alpha \beta} (-(\alpha + \beta)) \notag \\
                            &= -(\beta + \alpha) = b \\
   \sigma_{\alpha \beta}(c) &= \sigma_{\alpha \beta}(\alpha \beta) \notag \\
                            &= \beta \alpha = c
 \end{align}
+である。（置換群を、多項式に作用させている）
+
 また、$b,\ c$に四則演算を行った$b + c$や $c (b + 3 c/b)$なども、全て$\sigma_{\alpha \beta}$について不変。
 \end{frame}
 
@@ -1233,7 +1239,7 @@ $S_2$不変な数の集合から「抜け出す」ための演算が\alert{根�
 
 \begin{frame}
 \frametitle{対称性を破る}
-ところで、$\alpha - \beta$ は$\sigma_{\alpha \beta}$をかけると$-1$倍になる（不変でない）
+$\alpha - \beta$ は$\sigma_{\alpha \beta}$をかけると$-1$倍になる（不変でない）
 \begin{align}
   \sigma_{\alpha \beta} \lr{\alpha - \beta} &= \beta - \alpha = -(\alpha - \beta)
 \end{align}
@@ -1247,14 +1253,14 @@ $S_2$不変な数の集合から「抜け出す」ための演算が\alert{根�
 \end{frame}
 
 \begin{frame}
-\frametitle{根号による対称性の破れ}
+\frametitle{根号による対称性の減少}
 すなわち、
 \begin{align}
   (\alpha - \beta)^2 &= (\alpha + \beta)^2 - 4 \alpha \beta \notag \\
                      &= b^2 - 4 c \\
   \alpha - \beta &= \pm \sqrt{b^2 - 4 c}.
 \end{align}
-ここの根号$\pm \sqrt{\ }$で\alert{対称性が破れる}。あとは、これと$\alpha + \beta = -b$を
+ここの根号$\pm \sqrt{\ }$で\alert{対称性が崩れる}。あとは、これと$\alpha + \beta = -b$を
 連立すれば、$\alpha,\ \beta$が解ける。
 
 $\rightsquigarrow$ $2$次方程式の解の公式が存在する。
@@ -1273,7 +1279,7 @@ $3$次方程式$x^3+bx^2+cx+d=0$についても、解を$\alpha,\ \beta,\ \gamma
 
 \begin{frame}
 \frametitle{$3$次方程式の解の対称性}
-解$\alpha,\ \beta,\ \gamma$について、
+解$\alpha,\ \beta,\ \gamma$は
 $\alpha \rightarrow \beta \rightarrow \gamma \rightarrow \alpha$とする変換$\sigma_{\alpha \beta \gamma}$について
 \begin{align}
   \sigma_{\alpha \beta \gamma}(\alpha) = \beta \neq \alpha
@@ -1289,14 +1295,16 @@ $2$次方程式における$\alpha - \beta$に対応するものが
 \begin{align}
   T = (\alpha - \beta)(\beta - \gamma)(\gamma - \alpha)
 \end{align}
-である。$T$に互換$\clr{\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}}$をかけると$-1$倍になる。e.g.
+である。$T$に奇置換$\clr{\sigma_{\alpha \beta}, \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}}$をかけると$-1$倍になる。e.g.
 \begin{align}
   \sigma_{\alpha \beta}(T) &= (\beta - \alpha)(\alpha - \gamma)(\gamma - \beta) = -(\alpha - \beta)(\beta - \gamma)(\gamma - \alpha) = -T \notag
 \end{align}
-一方、偶置換 $A_3 = \clr{e,\ \sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}}$については、$T$は不変。e.g.
+一方、偶置換$\clr{e, \sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$は
+奇置換$2$個に分解できるので
 \begin{align}
   \sigma_{\alpha \beta \gamma}(T) = \sigma_{\alpha \beta}(\sigma_{\beta \gamma}(T)) = (-1)^2 T = T
 \end{align}
+となり、$T$は偶置換で不変。
 \end{frame}
 
 \begin{frame}
@@ -1313,7 +1321,7 @@ $T$は奇置換で$-1$倍、偶置換で$1$倍（不変）であったので、
 \frametitle{対称性の分解：$S_3 \rightarrow A_3$}
 したがって、$T$は$b,\ c,\ d$と平方根$\sqrt{\ }$で記述できることになる。
 
-しかし、$T$はまだ$A_3 = \clr{e,\ \sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}}$で不変なので、
+しかし、$T$はまだ偶置換$\clr{e,\ \sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}}$で不変なので、
 解$\alpha,\ \beta,\ \gamma$を$T$で記述することはできない。
 \end{frame}
 
@@ -1335,14 +1343,14 @@ $T$は奇置換で$-1$倍、偶置換で$1$倍（不変）であったので、
 \begin{frame}
 \frametitle{対称性の分解：$A_3 \rightarrow e$}
 すると、$(\alpha - \beta)^2$や$T^2$と同じ仕組みで、
-$U_{\pm}^3$は$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$で不変になる。
+$U_{\pm}^3$は偶置換$\clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$で不変になる。
 \begin{align}
   \sigma_{\alpha \beta \gamma} \lr{U_{\pm}^3} &= (\omega_{\mp} U_{\pm})^3 = U_{\pm}^3 \\
   \sigma_{\gamma \beta \alpha} \lr{U_{\pm}^3} &= \lr{\sigma_{\alpha \beta \gamma}^2}\lr{U_{\pm}^3} = U_{\pm}^3
 \end{align}
-$\therefore$ $U_{\pm}^3$は$A_3$不変。$\Leftrightarrow$ $U_{\pm}^3$は$T$と$b, c, d$の四則演算で記述できる。
+$U_{\pm}^3$は偶置換で不変。$\Leftrightarrow$ $U_{\pm}^3$は$T$を使えば記述できる。
 
-$\Leftrightarrow$その立方根である$U_{\pm}$は、$T, b, c, d$と立方根$\sqrt[3]{\ }$で記述できる。
+$\Leftrightarrow$その立方根$U_{\pm}$は、$T$と立方根$\sqrt[3]{\ }$で記述できる。
 \end{frame}
 
 \begin{frame}
@@ -1382,168 +1390,85 @@ $\rightsquigarrow$ $3$次方程式の解の公式が存在する。
 \draw (0,-2.8) node{$\beta$};
 \draw (0.6,-2.8) node{$\gamma$};
 \draw[->] (3.4,0.0) node[anchor=west]{$S_3$不変} -- (1.75, -0.5);
-\draw[->] (3.4,-0.6) node[anchor=west]{$A_3$不変} -- (2, -0.9);
+\draw[->] (3.4,-0.6) node[anchor=west]{偶置換($A_3$)不変} -- (2, -0.9);
 \draw[->] (3.4,-1.2) node[anchor=west]{$e$不変} -- (3, -1.3);
 \end{tikzpicture}
 \]
 \end{frame}
 
-
 \begin{frame}
-\frametitle{対称性の分解}
-天下りだが、$1$の立方根$\omega_{\pm} = (-1 \pm \sqrt{-3})/2$を使って
+\frametitle{$5$次方程式の非可解性}
+\begin{tabular}{c|cc}
+                    &奇置換&偶置換 \\
+                    &$\sigma_{\alpha \beta}$&$e$ \\ \hline
+  係数$b,c$         &〇&〇 \\
+  $(\alpha - \beta)^2$&〇&〇 \\
+  $\alpha - \beta$  &$-1$倍&〇 \\
+  解$\alpha, \beta$ &--&〇
+\end{tabular}
+
+$2$次方程式が解けたのは、
 \begin{align}
-  U &= \alpha + \beta \omega_+ + \gamma \omega_+^2 \\
-  V &= \alpha + \beta \omega_- + \gamma \omega_-^2
+\sigma_{\alpha \beta}(P^2) = P^2 \ \text{かつ} \ \sigma_{\alpha \beta}(P) \neq P
 \end{align}
-と置く。$U$（$V$)に$\sigma_{\alpha \beta \gamma}$（$\sigma_{\gamma \beta \alpha}$）をかけると$\omega_-$（$\omega_+$）倍になる。
+となる式$P = \alpha - \beta$が見付かったから。
+\end{frame}
+
+\begin{frame}
+\frametitle{$5$次方程式の非可解性}
+\begin{tabular}{c|cccc}
+       &奇置換                                & \multicolumn{2}{|c}{偶置換} \\
+       &$\clr{\sigma_{\alpha \beta},\sigma_{\beta \gamma},\sigma_{\gamma \alpha}}$ & \multicolumn{1}{|c}{$\clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$} & $e$ \\ \hline
+  係数$b,c,d$&〇&〇&〇 \\
+  $T^2$&〇&〇&〇 \\
+  $T$  &$-1$倍&〇&〇 \\
+  $U_{\pm}^3$ &--&〇&〇 \\
+  $U_{\pm}$   &--&$\omega_{\mp}$倍&〇 \\
+  解$\alpha, \beta,\gamma$ &--&--&〇
+\end{tabular}
+
+$3$次方程式が解けたのは、$e$でない偶置換$\sigma_\mathrm{ev} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$で
 \begin{align}
-  \sigma_{\alpha \beta \gamma}\lr{U} &= \beta + \gamma \omega_+ + \alpha \omega_+^2 \notag \\
-                                     &= \omega_+^3 \lr{\beta + \gamma \omega_+ + \alpha \omega_+^2} \notag \\
-                                     &= \omega_+^2 \lr{\beta \omega_+ + \gamma \omega_+^2 + \alpha \omega_+^3} \notag \\
-                                     &= \omega_+^2 \lr{\alpha + \beta \omega_+ + \gamma \omega_+^2} = \omega_+^2 U = \omega_- U
+  \sigma_\mathrm{ev}(P^3) = P^3 \ \text{かつ} \ \sigma_\mathrm{ev}(P) \neq P
 \end{align}
-最終等号では$\omega_\pm = \omega_{\mp}^2$を使った。
+となる式$P = U_\pm$が見付かったから。
 \end{frame}
 
 \begin{frame}
-\frametitle{対称性の分解}
-すると、$(\alpha - \beta)^2$が対称式になったように、
-$U^3,\ V^3$は$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$で不変になる。
+\frametitle{$5$次方程式の非可解性}
+解を$\clr{\alpha, \beta, \gamma, \delta, \eta}$とする$5$次方程式でも、$e$でない偶置換$\sigma_\mathrm{ev}$で
 \begin{align}
-  \sigma_{\alpha \beta \gamma} \lr{U^3} &= (\omega_- U)^3 = U^3 \\
-  \sigma_{\gamma \beta \alpha} \lr{U^3} &= \lr{\sigma_{\alpha \beta \gamma}^2}\lr{U^3} = U^3 \\
-  \sigma_{\gamma \beta \alpha} \lr{V^3} &= (\omega_+ V)^3 = V^3 \\
-  \sigma_{\alpha \beta \gamma} \lr{V^3} &= \lr{\sigma_{\gamma \beta \alpha}^2}\lr{V^3} = V^3 \\
+  \sigma_\mathrm{ev}(P^3) = P^3 \ \text{かつ} \ \sigma_\mathrm{ev}(P) \neq P \label{eq:5cond}
 \end{align}
-\end{frame}
-
-\begin{frame}
-\frametitle{対称性の分解}
-さらに都合の良いことに、$U^3$に$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}$をかけると$V^3$になる。
+となる式$P$を見付けなければならない。\\
+しかし、$5$次の場合、$5$次巡回置換$\sigma_\mathrm{q}$(e.g. $\alpha \to$ $\beta \to$ $\gamma \to$ $\delta \to$ $\eta \to \alpha$)に
+ついて、任意の式$P$は$\sigma_{\mathrm{q}}^5(P) = P$を満たす。そして、
 \begin{align}
-  \sigma_{\alpha \beta}\lr{U^3}  &= \lr{\beta + \alpha \omega_+ + \gamma \omega_+^2}^3 \notag \\
-                                 &= \lr{\beta + \alpha \omega_+ + \gamma \omega_+^2}^3 \omega_+^6 \notag \\
-                                 &= \lr{\beta \omega_+^2 + \alpha \omega_+^3 + \gamma \omega_+^4}^3 \notag \\
-                                 &= \lr{\alpha + \beta \omega_- + \gamma \omega_-^2}^3 = V^3 \\
-  \sigma_{\beta \gamma}\lr{U^3}  &= \lr{\alpha + \gamma \omega_+ + \beta \omega_+^2}^3 \notag \\
-                                 &= \lr{\alpha + \beta \omega_- + \gamma \omega_+^2}^3 = V^3
-  \sigma_{\gamma \alpha}\lr{U^3} &= \lr{\gamma + \beta \omega_+ + \alpha \omega_+^2}^3 \notag \\
-                                 &= \lr{\gamma + \beta \omega_+ + \alpha \omega_+^2}^3 \omega_+^3 \notag \\
-                                 &= \lr{\gamma \omega_+ + \beta \omega_+^2 + \alpha \omega_+^3}^3 \notag \\
-                                 &= \lr{\alpha + \beta \omega_- + \gamma \omega_-^2}^3 = V^3
+  \sigma_{\mathrm{q}}^5(P) = P \ \text{かつ} \ \sigma_\mathrm{ev}(P^3) = P^3 \ \Rightarrow \ \sigma_\mathrm{ev}(P) = P
 \end{align}
-したがって、$U^3 + V^3$のような$U^3 \leftrightarrow V^3$の置換について対称な式は
-$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}$不変。
+が証明できる。すなわち、(\ref{eq:5cond})の条件を満たす式$P$は存在しない。
 
-また、$U^3 - V^3$に$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}$をかけると$-1$倍になる。
-\end{frame}
-\begin{frame}
-\frametitle{対称性の分解}
-すると、$(\alpha - \beta)^2$が$\sigma_{\alpha \beta}$不変になったように、
-$(U^3-V^3)^2$は$\clr{\sigma_{\alpha \beta},\ \sigma_{\beta \gamma}, \sigma_{\gamma \alpha}}$不変になる。
-
-ところで、$U,\ V$は$\clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$不変だったので、
-$(U^3 - V^3)^2$は$S_3$不変。
-$\rightsquigarrow$ 係数$b,\ c,\ d$で記述できる。
+$\rightsquigarrow$ $5$次方程式の解の公式は存在しない。
 \end{frame}
 
 \begin{frame}
-\frametitle{対称性の分解}
-$(U^3 - V^3)^2$を係数$b,\ c,\ d$で書いてしまえば、あとは
+\frametitle{対称性と空間}
+実は、ここまでの議論でGalois理論は\alert{使っていない}。
+
+Galois理論は、「数の空間$\leftrightarrow$対称性$\leftrightarrow$群」の対応を
+より厳密かつスマートに記述する枠組みであるが、今回は深入りしない。
+
+ただ、Galois理論に言及せずとも、ここまでの議論で
+\begin{center}
+対称性で空間を分解する
+\end{center}
+という発想の一端は垣間見える。
+そして、その裏には群の作用があることも分かる。
 \end{frame}
 
 \begin{frame}
-\frametitle{対称性の分解}
-天下りだが、$1$の立方根$\omega = (-1 + \sqrt{-3})/2$を使って
-\begin{align}
-  U &= \lr{\alpha + \beta \omega + \gamma \omega^2}^3 \\
-  V &= \lr{\alpha + \gamma \omega + \beta \omega^2}^3
-\end{align}
-と置くと$U$と$V$は$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$について不変。e.g.
-\begin{align}
-  \sigma_{\alpha \beta \gamma}\lr{U} &= \sigma_{\alpha \beta \gamma}\lr{\lr{\alpha + \beta \omega + \gamma \omega^2}^3} \notag \\
-                                     &= \lr{\beta + \gamma \omega + \alpha \omega^2}^3 \notag \\
-                                     &= \lr{\beta + \gamma \omega + \alpha \omega^2}^3 \omega^3 \notag \\
-                                     &= \lr{\beta \omega + \gamma \omega^2 + \alpha \omega^3}^3 \notag \\
-                                     &= \lr{\alpha + \beta \omega + \gamma \omega^2}^3 = U
-\end{align}
-\end{frame}
+\frametitle{空間の分解}
 
-\begin{frame}
-\frametitle{対称性の分解}
-また、$U$と$V$は$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$で入れ替わる。
-\begin{align}
-  \sigma_{\alpha \beta}\lr{U} &= \lr{\beta + \alpha \omega + \gamma \omega^2}^3 \notag \\
-                              &= \lr{\beta + \alpha \omega + \gamma \omega^2}^3 \omega^6 \notag \\
-                              &= \lr{\beta \omega^2+ \alpha \omega^3 + \gamma \omega^4}^3 \notag \\
-                              &= \lr{\alpha + \gamma \omega + \beta \omega^2}^3 = V.
-\end{align}
-したがって$U + V,\ UV$は$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$についても不変。
-つまり、$U + V,\ UV$は$S_3$不変になり、係数$b,\ c,\ d$で記述できる。
-\end{frame}
-
-\begin{frame}
-\frametitle{対称性の分解}
-四則演算の関数 $f_+,\ f_\ast$で
-\begin{align}
-  U + V &= f_+(b, c, d) \\
-  U V &= f_\ast(b, c, d)
-\end{align}
-と書けているので、この$2$元連立$2$次方程式を解けば$U,\ V$が$b,\ c,\ d$の四則演算と$\sqrt{\ }$で表される。
-
-この$2$次方程式と解く際に$\sqrt{\ }$をとるので、$U \leftrightarrow V$の対称性、
-すなわち$\sigma_{\alpha \beta},\ \sigma_{\beta \gamma},\ \sigma_{\gamma \alpha}$の不変性が
-壊れる。（$U$と$V$の「区別がつかない」空間から、「区別がつく」空間に拡がる）
-\end{frame}
-
-\begin{frame}
-\frametitle{対称性の分解}
-$U,\ V$が解けると、
-\begin{align}
-  -b &= \alpha + \beta + \gamma \\
-  \sqrt[3]{U} &= \alpha + \beta \omega + \gamma \omega^2 \\
-  \sqrt[3]{V} &= \alpha + \beta \omega^2 + \gamma \omega
-\end{align}
-なので、この$3$元連立方程式を解けば$\alpha,\ \beta,\ \gamma$が求められる。
-ここの$\sqrt[3]{\ }$をとるときに$\sigma_{\alpha \beta \gamma},\ \sigma_{\gamma \beta \alpha}$の
-不変性が壊れる。
-\end{frame}
-
-\begin{frame}
-\frametitle{数の空間の拡大}
-% $\clr{b,c,d} \rightarrow \clr{U+V, UV} \in $\{$b,c,d$の四則演算\}$ \rightarrow \clr{U, V} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma{\gamma \beta \alpha} inv.} \rightarrow \clr{\sqrt[3]{U}, \alpha, \beta, \gamma}$
-\[
-\begin{tikzpicture}
-\fill (-0.3,-0.15) circle (1pt);
-\draw (-0.3,-0.15) node[anchor=south]{$b$};
-\fill (0.3,-0.25) circle (1pt);
-\draw (0.3,-0.25) node[anchor=south]{$c$};
-\draw (0,0) circle (1cm and 0.5cm);
-\draw (0,-0.5) circle (1.75cm and 1cm);
-\draw (0,-0.42) node[anchor=north]{$b$と$c$の四則演算};
-\draw (0,-0.9) circle (2cm and 1.4cm);
-\fill (-0.7,-2) circle (1pt);
-\draw (-0.7,-2) node[anchor=south]{$\alpha$};
-\fill (0.7,-2) circle (1pt);
-\draw (0.7,-2) node[anchor=south]{$\beta$};
-\draw[->] (2.4,0.0) node[anchor=west]{$\sigma_{\alpha \beta}$不変} -- (1.75, -0.5);
-\draw[->] (2.4,-0.8) node[anchor=west]{$\sigma_{\alpha \beta}$不変とは限らない} -- (2, -0.9);
-\end{tikzpicture}
-\]
-\end{frame}
-
-\begin{frame}
-\frametitle{方程式の可解性}
-$3$次方程式が解けるのは、$U + V$と$UV$という$2$つの$S_3$不変な式（対称式）が見付かったからである。
-
-$4$次方程式についても、$4$次対称群$S_4$について $3$つの$S_4$不変な式が見付かり、
-これを$3$次方程式を使って解くことで、$4$次方程式が解ける。
-
-しかし、$5$次方程式では、$5$次対象群$S_5$にそのような``都合のいい対称式''は存在せず、
-そのために$5$次方程式の解の公式は存在しない。
-
-この``都合のいい対称式''が存在しないことの証明に、群論が使われる。
 \end{frame}
 
 \begin{frame}
