@@ -42,7 +42,7 @@
 \def\totalLength{10}
 \def\springStraightLength{0.2}
 \def\axisDepth{-0.7}
-\def\t{30}
+%\def\t{27}
 
 %%% 壁などのスタイル
 \tikzset{wall/.style={pattern = north east lines}}
@@ -69,7 +69,7 @@
 
 \def\opcty{0.1}
 
-\title{群の表現}
+\title{群論という視点}
 \author{武智}
 \begin{document}
 \frame{\maketitle}
@@ -93,17 +93,6 @@ $\rightsquigarrow$ A. そんなことはない。
 その御利益に気付きにくい。
 \end{frame}
 
-\begin{frame}
-\frametitle{はじめに}
-群は代数的な定義されるので、そのままでは実体が捉えにくい。
-
-そこで、群を線形代数と結び付けて、そこでの振る舞いから群を理解しよう、
-というのが「群の表現」という研究分野。
-
-線形代数という舞台の上では、具体的な計算もできるし、幾何学的なイメージも持てる。
-
-群の表現を知ることで、より群が身近なものになる（かも）。
-\end{frame}
 
 \begin{frame}{流れ}
 \begin{enumerate}
@@ -112,7 +101,9 @@ $\rightsquigarrow$ A. そんなことはない。
 \item 置換群
 \item 群の作用
 \end{enumerate}
-\item 群の表現とは
+\item 代数方程式の非可解性
+\item 群論の応用：$2$質点連成振動子系
+\item ポエム
 \end{enumerate}
 \end{frame}
 
@@ -1398,6 +1389,7 @@ $\rightsquigarrow$ $3$次方程式の解の公式が存在する。
 
 \begin{frame}
 \frametitle{$5$次方程式の非可解性}
+\begin{center}
 \begin{tabular}{c|cc}
                     &奇置換&偶置換 \\
                     &$\sigma_{\alpha \beta}$&$e$ \\ \hline
@@ -1406,16 +1398,18 @@ $\rightsquigarrow$ $3$次方程式の解の公式が存在する。
   $\alpha - \beta$  &$-1$倍&〇 \\
   解$\alpha, \beta$ &--&〇
 \end{tabular}
-
+\end{center}
+\vspace{-1em}
 $2$次方程式が解けたのは、
 \begin{align}
-\sigma_{\alpha \beta}(P^2) = P^2 \ \text{かつ} \ \sigma_{\alpha \beta}(P) \neq P
+\sigma_{\alpha \beta}(P^2) = P^2 \ \ \text{かつ} \ \ \sigma_{\alpha \beta}(P) \neq P
 \end{align}
 となる式$P = \alpha - \beta$が見付かったから。
 \end{frame}
 
 \begin{frame}
 \frametitle{$5$次方程式の非可解性}
+\begin{table}
 \begin{tabular}{c|cccc}
        &奇置換                                & \multicolumn{2}{|c}{偶置換} \\
        &$\clr{\sigma_{\alpha \beta},\sigma_{\beta \gamma},\sigma_{\gamma \alpha}}$ & \multicolumn{1}{|c}{$\clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$} & $e$ \\ \hline
@@ -1426,10 +1420,11 @@ $2$次方程式が解けたのは、
   $U_{\pm}$   &--&$\omega_{\mp}$倍&〇 \\
   解$\alpha, \beta,\gamma$ &--&--&〇
 \end{tabular}
-
+\end{table}
+\vspace{-1em}
 $3$次方程式が解けたのは、$e$でない偶置換$\sigma_\mathrm{ev} \in \clr{\sigma_{\alpha \beta \gamma}, \sigma_{\gamma \beta \alpha}}$で
 \begin{align}
-  \sigma_\mathrm{ev}(P^3) = P^3 \ \text{かつ} \ \sigma_\mathrm{ev}(P) \neq P
+  \sigma_\mathrm{ev}(P^3) = P^3 \ \ \text{かつ} \ \ \sigma_\mathrm{ev}(P) \neq P
 \end{align}
 となる式$P = U_\pm$が見付かったから。
 \end{frame}
@@ -1438,13 +1433,13 @@ $3$次方程式が解けたのは、$e$でない偶置換$\sigma_\mathrm{ev} \in
 \frametitle{$5$次方程式の非可解性}
 解を$\clr{\alpha, \beta, \gamma, \delta, \eta}$とする$5$次方程式でも、$e$でない偶置換$\sigma_\mathrm{ev}$で
 \begin{align}
-  \sigma_\mathrm{ev}(P^3) = P^3 \ \text{かつ} \ \sigma_\mathrm{ev}(P) \neq P \label{eq:5cond}
+  \sigma_\mathrm{ev}(P^3) = P^3 \ \ \text{かつ} \ \ \sigma_\mathrm{ev}(P) \neq P \label{eq:5cond}
 \end{align}
 となる式$P$を見付けなければならない。\\
-しかし、$5$次の場合、$5$次巡回置換$\sigma_\mathrm{q}$(e.g. $\alpha \to$ $\beta \to$ $\gamma \to$ $\delta \to$ $\eta \to \alpha$)に
-ついて、任意の式$P$は$\sigma_{\mathrm{q}}^5(P) = P$を満たす。そして、
+しかし、$5$次の場合、$5$次巡回置換$\sigma_\mathrm{q}$(e.g. $\alpha \to$ $\beta \to$ $\gamma \to$ $\delta \to$ $\eta \to \alpha$)が
+あり、任意の式$P$は$\sigma_{\mathrm{q}}^5(P) = P$となる。そして、
 \begin{align}
-  \sigma_{\mathrm{q}}^5(P) = P \ \text{かつ} \ \sigma_\mathrm{ev}(P^3) = P^3 \ \Rightarrow \ \sigma_\mathrm{ev}(P) = P
+  \clr{\sigma_{\mathrm{q}}^5(P) = P \ \ \text{かつ} \ \ \sigma_\mathrm{ev}(P^3) = P^3} \ \Rightarrow \ \sigma_\mathrm{ev}(P) = P
 \end{align}
 が証明できる。すなわち、(\ref{eq:5cond})の条件を満たす式$P$は存在しない。
 
@@ -1456,7 +1451,7 @@ $\rightsquigarrow$ $5$次方程式の解の公式は存在しない。
 実は、ここまでの議論でGalois理論は\alert{使っていない}。
 
 Galois理論は、「数の空間$\leftrightarrow$対称性$\leftrightarrow$群」の対応を
-より厳密かつスマートに記述する枠組みであるが、今回は深入りしない。
+より厳密かつスマートに記述する枠組みであり、今回は深入りしない。
 
 ただ、Galois理論に言及せずとも、ここまでの議論で
 \begin{center}
@@ -1468,19 +1463,19 @@ Galois理論は、「数の空間$\leftrightarrow$対称性$\leftrightarrow$群�
 
 \begin{frame}
 \frametitle{空間の分解}
+群論の発想は、具体的かつ実際的な問題にも応用できる。
 
+最も分かりやすい例として調和振動子系を考える。
 \end{frame}
 
 \begin{frame}
-Mは「2質点であること」を制限する条件。
+\frametitle{固定端$2$質点連成振動}
+質量$m$の$2$質点がばね係数$k$のばね$3$つで下図のように連結している。ばね両端は壁に固定。
 
-\end{frame}
-
-\begin{frame}{連成振動子系}
-
+\FPeval\t{27.0}%
 \FPeval\u{\A*cos(\OMEGA*\t)+\B*sin(1.73*\OMEGA*\t)}%
 \FPeval\v{\A*cos(\OMEGA*\t)-\B*sin(1.73*\OMEGA*\t)}%
-\centering
+{\centering
 \begin{tikzpicture}[>=stealth]
 %%% 左壁
 \coordinate (south east of left wall) at (0,-.5*\wallHeight);
@@ -1501,8 +1496,8 @@ Mは「2質点であること」を制限する条件。
               (2*\totalLength/3,\axisDepth-0.3) -- +(0,1.6)
               (a.south |- south east of left wall) -- (a.south)
               (b.south |- south east of left wall) -- (b.south);
-\draw[->] (\totalLength/3,\axisDepth-0.15) --node[below] {$x_1$} +(\u,0);
-\draw[->] (2*\totalLength/3,\axisDepth-0.15) --node[below] {$x_2$} +(\v,0);
+\draw[->] (\totalLength/3,\axisDepth-0.15) --node[below] {$u_1$} +(\u,0);
+\draw[->] (2*\totalLength/3,\axisDepth-0.15) --node[below] {$u_2$} +(\v,0);
 %%% 座標計算
 \coordinate (0) at (0,0);
 \coordinate (0-right) at (\springStraightLength,0);
@@ -1523,15 +1518,290 @@ Mは「2質点であること」を制限する条件。
 \draw[spring={\totalLength/3 + \u}] (0-right) -- node[springk]{} (a-left);
 \draw[spring={\totalLength/3 + \v - \u}] (a-right) -- node[springk]{} (b-left);
 \draw[spring={\totalLength/3 - \v}] (b-right) -- node[springk]{} (c-left);
-\end{tikzpicture}
+\end{tikzpicture}}
+
+自然長（静止状態）からの変位を$u_i (i = 1,2)$とする。
 \end{frame}
 
 \begin{frame}
 \frametitle{運動方程式}
+$2$階の時間微分を$\ddot{u}$で表すと、運動方程式は
 \begin{align}
-  \label{eq:motionN2}
-  m 
+  m \ddot{u}_1 &= -k u_1 + k (u_2 - u_1) \\
+  m \ddot{u}_2 &= -k (u_2 - u_1) + k (-u_2)
 \end{align}
+すなわち
+\begin{align}
+  m \ddot{u}_1 &= -2k u_1 + k u_2 \\
+  m \ddot{u}_2 &= k u_1 - 2k u_2
+\end{align}
+となる。
+\end{frame}
+
+\begin{frame}
+\frametitle{運動方程式}
+縦ベクトルで
+\begin{align}
+  \bm{u} = \lr{
+  \begin{array}{c}
+    u_1 \\
+    u_2
+  \end{array}}
+\end{align}
+とおくと、運動方程式は
+\begin{align}
+  \ddot{\bm{u}} &= \dfrac{k}{m} \lr{
+  \begin{array}{cc}
+    2 & -1 \\
+    -1 & 2
+  \end{array}} \bm{u} \\
+  &= -\dfrac{k}{m} M \bm{u}
+\end{align}
+と書ける。
+\end{frame}
+
+\begin{frame}
+\frametitle{通常の解法}
+通常は、係数の行列$M$を対角化して解く。
+\begin{align}
+  M &= U^{-1} \bar{M} U \\
+  U &= \dfrac{1}{\sqrt{2}}
+  \lr{\begin{array}{cc}
+        1 & 1 \\
+        1 & -1
+      \end{array}},\ 
+  \bar{M} =
+  \lr{\begin{array}{cc}
+        1 & 0 \\
+        0 & 3
+      \end{array}} \\
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{通常の解法}
+\begin{align}
+  \ddot{\bm{u}} = -\dfrac{k}{m} M \bm{u} \ \Leftrightarrow \ 
+  U \ddot{\bm{u}} &= -\dfrac{k}{m} U U^{-1} \bar{M} U \bm{u} \notag \\
+  U \ddot{\bm{u}} &= -\dfrac{k}{m} \bar{M} U \bm{u} \notag
+\end{align}
+ここで
+\begin{align}
+  \bm{v} = \lr{
+  \begin{array}{c}
+    v_1 \\
+    v_2
+  \end{array}} \equiv
+  U \bm{u} = \dfrac{1}{\sqrt{2}} \lr{
+  \begin{array}{cc}
+    1 & 1 \\
+    1 & -1
+  \end{array}} \lr{
+  \begin{array}{c}
+    u_1 \\
+    u_2
+  \end{array}}
+  = \dfrac{1}{\sqrt{2}} \lr{
+  \begin{array}{c}
+    u_1 + u_2 \\
+    u_1 - u_2
+  \end{array}} \notag
+\end{align}
+とおくと
+\end{frame}
+
+
+\begin{frame}
+\frametitle{通常の解法}
+\begin{align}
+  \ddot{v}_1 &= -\dfrac{k}{m} v_1 \\
+  \ddot{v}_2 &= -\dfrac{3k}{m} v_2
+\end{align}
+よって
+\begin{align}
+  v_i = A_i e^{i \omega_i t} v_i
+\end{align}
+ただし$\omega_1 = \sqrt{k/m},\ \omega_2 = \sqrt{3k/m}$で、$A_i$は初期条件から決まる定数。
+\end{frame}
+
+\begin{frame}
+\frametitle{座標変換}
+この解法の上手いところは、
+\begin{align}
+  \lr{
+    \begin{array}{c}
+    v_1 \\
+    v_2
+  \end{array}} = \dfrac{1}{\sqrt{2}} \lr{
+  \begin{array}{c}
+    u_1 + u_2 \\
+    u_1 - u_2
+  \end{array}}
+\end{align}
+という座標変換にある。$v_1$を重心座標、$v_2$を相対座標と呼ぶこともあるが、
+このように分解すると$2$変数の絡まりがほどける。
+
+この背景には、鏡映反転に対する対称性がある。
+\end{frame}
+
+\begin{frame}
+\frametitle{鏡映変換}
+$2$質点の中心を対称面とする鏡映変換は、$\bm{u}$を
+\begin{align}
+  \lr{\begin{array}{c}
+        u_1 \\ u_2
+      \end{array}} \mapsto
+  \lr{\begin{array}{c}
+        u'_1 \\ u'_2
+      \end{array}} =
+  \lr{\begin{array}{c}
+        -u_2 \\ -u_1
+      \end{array}}
+\end{align}
+と変換する。つまり、$2$質点を入れ替えた上で、その変位の向きを逆にする。
+
+変換行列$D$を導入して、次のようにも書ける。
+\begin{align}
+  \lr{\begin{array}{c}
+        u'_1 \\ u'_2
+      \end{array}} =
+  \lr{\begin{array}{cc}
+        0 & -1 \\
+        -1 & 0
+      \end{array}}
+  \lr{\begin{array}{c}
+        u_1 \\ u_2
+      \end{array}} = D \bm{u}
+\end{align}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{鏡映変換対称}
+鏡映変換について不変なベクトル$\bm{\xi}$を考えると
+\begin{align}
+  \xi'_1 \mapsto -\xi_2 = \xi_1 \\
+  \xi'_2 \mapsto -\xi_1 = \xi_2
+\end{align}
+となり、
+\begin{align}
+  \bm{\xi} \propto \lr{\begin{array}{c} 1 \\ -1 \end{array}}
+\end{align}
+という$1$次元空間上のベクトルは鏡映変換対称になる。
+\end{frame}
+
+\begin{frame}
+\frametitle{鏡映変換反対称}
+一方、鏡映変換について向きを反転するベクトル$\bm{\eta}$を考えると
+\begin{align}
+  \eta'_1 \mapsto -\eta_2 = -\eta_1 \\
+  \eta'_2 \mapsto -\eta_1 = -\eta_2
+\end{align}
+となり、
+\begin{align}
+  \bm{\eta} \propto \lr{\begin{array}{c} 1 \\ 1 \end{array}}
+\end{align}
+という$1$次元空間上のベクトルは鏡映変換反対称になる。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性による空間の分解}
+$\bm{\xi}$の方向と$\bm{\eta}$の方向は、元の$\bm{u}$空間の直交基底を張っている。
+
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\[
+\begin{tikzpicture}
+\draw[->] (-1.5,0) -- (1.5, 0);
+\draw[->] (0,-1.5)-- (0,1.5);
+\draw(1.4, 0) node[below]{$u_1$};
+\draw(0, 1.4) node[right]{$u_2$};
+\draw[->] (-1.5, -1.5) -- (1.5, 1.5);
+\draw[->] (-1.5, 1.5) -- (1.5, -1.5);
+\draw(1.3, 1.3) node[below]{$\eta$};
+\draw(1.3, -1.3) node[above]{$\xi$};
+\end{tikzpicture}
+\]
+\end{column}
+\begin{column}{0.6\textwidth}
+$\xi$成分だけでは、鏡映対称な運動しか記述できない。$\rightsquigarrow$
+$2$次方程式で、係数$b,c$が$\sigma_{\alpha \beta}$対称なために解$\alpha,\beta$を
+記述できないのと同じ。
+
+$\sigma_{\alpha \beta}$で反転する$\alpha - \beta$によって
+解が記述できたように、鏡映変換で反転する$\eta$成分によって
+任意の（対称性から解放された）運動を記述できる。
+\end{column}
+\end{columns}
+この$\xi$成分が重心座標、$\eta$成分が相対座標に対応している。
+\end{frame}
+
+\begin{frame}
+\frametitle{系の持つ対称性}
+$2$次元空間$\bm{u}$を$\clr{\xi, \eta}$で記述するのは、
+要は座標変換（直交変換）である。
+
+この座標変換が今の$2$質点連成振動子系と相性がいいのは、
+運動方程式の係数行列$M$と、鏡映変換の行列$D$が交換可能
+\begin{align}
+D M = M D
+\end{align}
+だからである。
+
+交換可能$\Leftrightarrow$同時対角化可能が効いて、
+鏡映対称性による空間の分解（重心座標、相対座標）が、
+運動方程式を解く上で有用になる。
+\end{frame}
+
+\begin{frame}
+\frametitle{変換$\leftrightarrow$対称性}
+鏡映対称性が、重心座標、相対座標への座標変換を導いたように、
+空間の対称性と変換は強く対応している。
+
+$N$質点の自由端連成振動子系では、鏡映対称性の他に
+並進対称性$u_i \mapsto u_i' = u_{j+k}$があり、
+この対称性がいわゆる離散Fourier変換を導く。
+\end{frame}
+
+\begin{frame}
+\frametitle{対称性で空間を拡げる}
+$2$質点連成振動子系では、最初に$2$次元空間$\bm{u}$を考えて
+それを対称成分$\xi$と反対称成分$\eta$に分解した。
+
+最初に対称な空間（$=$自由度の低い空間）があり、
+そこから対称性を破る方向に空間を``拡げる''という発想もあり得る。
+
+例えば、任意のベクトルはある軸について$2\pi$回転すると元に
+戻る（$2\pi$回転対称）。\\
+そこで「$2\pi$回転すると$-1$倍する」ようなものを考えて、
+対称性を崩すことで出てきたのがスピノル（スピン）、という解釈もできる。
+その背景には$SO(3)$と$SU(2)$という群がある。
+\end{frame}
+
+\begin{frame}
+\frametitle{情報科学への応用}
+例えば画像認識における機械学習において、augmentation として
+回転変換や並進変換を行うことがある。
+
+それらの変換（画像$\mapsto$画像）は、その画像のクラス（顔、猫、$\ldots$）を
+変えないという点で``不変''性を誘導し得る。
+
+その辺りから群論的考察ができる可能性はあるが、今のところ、
+有用かつ見通しの良い理論は、誰も構築できていないようである。
+
+機械学習の枠組みでは、入力データと予測結果の型（集合）が異なるため、
+群論における変換との相性が悪い。\\
+（すると、AutoEncoder のようなモデルは都合がいいのかも）
+\end{frame}
+
+\begin{frame}
+\frametitle{まとめ}
+\begin{enumerate}
+\item 群とは変換を集めたもの。
+\item 変換の裏には対称性があり、対称性は空間を分解する。
+\item 群という視点で、空間を分解したり拡大したりできる。
+\end{enumerate}
 \end{frame}
 
 \begin{frame}
